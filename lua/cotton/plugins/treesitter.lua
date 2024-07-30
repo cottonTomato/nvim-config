@@ -1,10 +1,13 @@
--- FIX: annoying diagnostics
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = { "BufReadPre", "BufNewFile" },
 		build = ":TSUpdate",
+		dependencies = {
+			"windwp/nvim-ts-autotag",
+		},
 		config = function()
+			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
 				indent = { enable = true },
 				ensure_installed = {
@@ -17,11 +20,16 @@ return {
 					"gitignore",
 					"go",
 					"json",
+					"javascript",
 					"just",
 					"lua",
+					"markdown",
+					"markdown_inline",
 					"python",
 					"rust",
 					"toml",
+					"tsx",
+					"typescript",
 					"vim",
 					"vimdoc",
 					"yaml",
@@ -35,6 +43,12 @@ return {
 						scope_incremental = "grs",
 						node_decremental = "grd",
 					},
+				},
+				highlight = {
+					enable = true,
+				},
+				autotag = {
+					enable = true,
 				},
 			})
 
@@ -50,6 +64,7 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
+			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
 				textobjects = {
 					select = {

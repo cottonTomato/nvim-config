@@ -41,18 +41,22 @@ return {
 			},
 		},
 	},
-	-- TODO: try this
-	-- {
-	--   "folke/edgy.nvim",
-	--   event = "VeryLazy",
-	--   opts = {}
-	-- },
-	-- TODO: try this
-	-- {
-	--   "nvim-focus/focus.nvim",
-	--   version = "*",
-	--   keys = {
-	--     { "<leader>wm", ":FocusToggle", desc = "Toggle Focus Mode" }
-	--   }
-	-- },
+	{
+		"echasnovski/mini.bufremove",
+		version = "*",
+		config = function()
+			local bufremove = require("mini.bufremove")
+			bufremove.setup({})
+
+			-- keymap
+			local keymap = vim.keymap
+
+			keymap.set("n", "<leader>bc", function()
+				bufremove.delete(0, false)
+			end, { desc = "Close buffer", silent = true })
+			keymap.set("n", "<leader>bq", function()
+				bufremove.delete(0, true)
+			end, { desc = "Force close buffer", silent = true })
+		end,
+	},
 }

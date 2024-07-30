@@ -1,61 +1,116 @@
 return {
 	{
-		"romgrk/barbar.nvim",
-		version = "^1.0.0",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = { "nvim-tree/nvim-web-devicons", "echasnovski/mini.bufremove" },
 		event = "VeryLazy",
-		init = function()
-			vim.g.barbar_auto_setup = false
-		end,
 		config = function()
-			require("barbar").setup({
-				auto_hide = 0,
-				clickable = false,
-				tabpages = false,
-				icons = {
-					button = false,
-					diagnostics = {
-						[vim.diagnostic.severity.ERROR] = { enabled = true, icon = "E:" },
-						[vim.diagnostic.severity.WARN] = { enabled = true, icon = "W:" },
+			local bufferline = require("bufferline")
+
+			bufferline.setup({
+				options = {
+					modified_icon = "[+]",
+					left_trunc_marker = "<-",
+					right_trunc_marker = "->",
+					separator_style = "thin",
+					close_command = "lua require('mini.bufremove').delete(%d, false)",
+					custom_filter = function(buf, buf_nums)
+						local filter_ft = { "neo-tree" }
+						for _, ft in ipairs(filter_ft) do
+							if vim.bo[buf].filetype == ft then
+								return false
+							end
+						end
+						return true
+					end,
+					offsets = {
+						{
+							filetype = "neo-tree",
+							text = "Explorer",
+							text_align = "center",
+							separator = true,
+						},
 					},
-					modified = { button = "[+]" },
+					show_buffer_close_icons = false,
+					show_close_icon = false,
+					always_show_bufferline = false,
+					hover = { enabled = false },
 				},
-				no_name_title = "[No Name]",
-				letters = "fjdksla;cmrueiwoqp",
-				semantic_letters = false,
+				highlights = {
+					indicator_selected = {
+						fg = "#98971a",
+					},
+				},
 			})
 
-			-- keymap
+			-- keybind
 			local keymap = vim.keymap
 
-			keymap.set("n", "gp", ":BufferPrevious<CR>", { desc = "Go to previous buffer", silent = true })
-			keymap.set("n", "gn", ":BufferNext<CR>", { desc = "Go to next buffer", silent = true })
-			keymap.set("n", "gj", ":BufferPick<CR>", { desc = "Jump to buffer", silent = true })
-			keymap.set("n", "<leader>bc", ":BufferClose<CR>", { desc = "Close current buffer", silent = true })
-			keymap.set("n", "<leader>bd", ":BufferPickDelete<CR>", { desc = "Pick & close buffers", silent = true })
-			keymap.set("n", "<leader>br", ":BufferRestore<CR>", { desc = "Restore last closed buffer", silent = true })
-			keymap.set("n", "<leader>bp", ":BufferPin<CR>", { desc = "Pin current buffer", silent = true })
+			keymap.set("n", "gn", ":BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
+			keymap.set("n", "gp", ":BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
+			keymap.set("n", "<leader><space>", ":BufferLinePick<CR>", { desc = "Jump to buffer", silent = true })
+
 			keymap.set(
 				"n",
-				"<leader>ba",
-				":BufferCloseAllButCurrentOrPinned<CR>",
-				{ desc = "Close all buffer but current & pinned", silent = true }
+				"<leader>bl",
+				":BufferLineMoveNext<CR>",
+				{ desc = "Move buffer next in line", silent = true }
 			)
 			keymap.set(
 				"n",
 				"<leader>bh",
-				":BufferMovePrevious<CR>",
-				{ desc = "Exchange with previous buffer", silent = true }
+				":BufferLineMovePrev<CR>",
+				{ desc = "Move buffer previous in line", silent = true }
 			)
-			keymap.set("n", "<leader>bl", ":BufferMoveNext<CR>", { desc = "Exchange with next buffer", silent = true })
 			keymap.set(
 				"n",
-				"<leader>bb",
-				":BufferOrderByDirectory<CR>",
-				{ desc = "Order buffers by folder/directory", silent = true }
+				"<leader>be",
+				":BufferLineSortByExtension<CR>",
+				{ desc = "Sort buffers by extension", silent = true }
 			)
+			keymap.set(
+				"n",
+				"<leader>bd",
+				":BufferLineSortByDirectory<CR>",
+				{ desc = "Sort buffers by directory", silent = true }
+			)
+			keymap.set("n", "<leader>bt", ":BufferLineSortByTabs<CR>", { desc = "sort buffers by tabs", silent = true })
+
+			keymap.set("n", "<leader>bk", ":BufferLinePickClose<CR>", { desc = "Pick close buffers", silent = true })
+			keymap.set("n", "<leader>bn", ":BufferLineCloseOther<CR>", { desc = "Nuke other buffers", silent = true })
+		end,
+	},
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons",
+		},
+		event = "VeryLazy",
+		config = function()
+			local barbecue = require("barbecue")
+
+			barbecue.setup({
+				create_autocmd = false,
+				show_dirname = false,
+				show_modified = true,
+				show_basename = false,
+			})
+
+			vim.opt.updatetime = 200
+			vim.api.nvim_create_autocmd({
+				"WinScrolled",
+				"BufWinEnter",
+				"CursorHold",
+				"InsertLeave",
+			}, {
+				group = vim.api.nvim_create_augroup("barbecue.updater", {}),
+				callback = function()
+					require("barbecue.ui").update()
+				end,
+			})
 		end,
 	},
 }

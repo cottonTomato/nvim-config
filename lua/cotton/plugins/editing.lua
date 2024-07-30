@@ -9,12 +9,13 @@ return {
 			local comment = require("Comment")
 			local ts_context_commentstring = require("ts_context_commentstring.integrations.comment_nvim")
 
-			-- FIX: annoying diagnostic
+			---@diagnostic disable-next-line: missing-fields
 			comment.setup({
 				pre_hook = ts_context_commentstring.create_pre_hook(),
 			})
 		end,
 	},
+	{ "chrisgrieser/nvim-spider", lazy = true },
 	{
 		"gbprod/substitute.nvim",
 		dependencies = { "gbprod/yanky.nvim" },
@@ -44,7 +45,6 @@ return {
 	{
 		"gbprod/yanky.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		keys = {},
 		config = function()
 			require("yanky").setup()
 
@@ -55,23 +55,11 @@ return {
 			keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)", { desc = "Paste before", silent = true })
 			keymap.set(
 				"n",
-				"]P",
-				"<Plug>(YankyPutIndentBeforeLinewise)",
-				{ desc = "Linewise paste before, readjust indent", silent = true }
-			)
-			keymap.set(
-				"n",
-				"[p",
-				"<Plug>(YankyPutIndentAfterLinewise)",
-				{ desc = "Linewise paste after, readjust indent", silent = true }
-			)
-			keymap.set(
-				"n",
-				"<M-p>",
+				"<C-p>",
 				"<Plug>(YankyPreviousEntry)",
 				{ desc = "Previous entry in kill ring", silent = true }
 			)
-			keymap.set("n", "<M-n>", "<Plug>(YankyNextEntry)", { desc = "Next entry in Kill ring", silent = true })
+			keymap.set("n", "<C-n>", "<Plug>(YankyNextEntry)", { desc = "Next entry in Kill ring", silent = true })
 		end,
 	},
 	{

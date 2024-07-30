@@ -34,31 +34,31 @@ return {
 		keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 
 		opts.desc = "Search recently opened files"
-		keymap.set("n", "<leader>fo", ":Telescope oldfiles<CR>", opts)
+		keymap.set("n", "<leader>fF", ":Telescope oldfiles<CR>", opts)
 
 		opts.desc = "Livegrep strings in cwd"
-		keymap.set("n", "<leader>fl", ":Telescope live_grep<CR>", opts)
+		keymap.set("n", "<leader>f<CR>", ":Telescope live_grep<CR>", opts)
 
 		opts.desc = "Grep string under cursor in cwd"
-		keymap.set("n", "<leader>fg", ":Telescope grep_string<CR>", opts)
+		keymap.set("n", "<leader>f<SPACE>", ":Telescope grep_string<CR>", opts)
 
 		opts.desc = "Search help tags"
 		keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
 
 		opts.desc = "Search man pages"
-		keymap.set("n", "<leader>fm", ":Telescope man_pages sections=ALL<CR>", opts)
+		keymap.set("n", "<leader>fH", ":Telescope man_pages sections=ALL<CR>", opts)
 
-		-- session workflow
-		opts.desc = "Search sessions"
-		keymap.set("n", "<leader>sf", ":Telescope session-lens<CR>", opts)
+		opts.desc = "Search marks"
+		keymap.set("n", "<leader>fm", ":Telescope marks<CR>", opts)
 
-		-- todos
-		opts.desc = "Search todos"
-		keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", opts)
+		opts.desc = "Search jumplist"
+		keymap.set("n", "<leader>fj", ":Telescope jumplist<CR>", opts)
 
-		-- misc
-		opts.desc = "Search & Reload Plugins"
-		keymap.set("n", "<leader>pr", ":Telescope reloader<CR>", opts)
+		opts.desc = "Search quickfixlist"
+		keymap.set("n", "<leader>fk", ":Telescope quickfix<CR>", opts)
+
+		opts.desc = "Search loclist"
+		keymap.set("n", "<leader>fl", ":Telescope loclist<CR>", opts)
 
 		-- lsp bindings
 		opts.desc = "Search document symbols"
@@ -78,5 +78,21 @@ return {
 
 		opts.desc = "Search for references"
 		keymap.set("n", "<leader>fr", ":Telescope lsp_references<CR>", opts)
+
+		-- buffer workflow
+		opts.desc = "Search buffer"
+		keymap.set("n", "<leader>bf", ":Telescope buffer<CR>", opts)
+
+		-- session workflow
+		opts.desc = "Search sessions"
+		keymap.set("n", "<leader>sf", ":Telescope session-lens<CR>", opts)
+
+		-- todos
+		opts.desc = "Search todos"
+		keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", opts)
+
+		-- misc
+		opts.desc = "Search & Reload Plugins"
+		keymap.set("n", "<leader>pr", ":Telescope reloader<CR>", opts)
 	end,
 }

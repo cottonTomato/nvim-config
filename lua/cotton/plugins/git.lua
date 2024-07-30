@@ -2,6 +2,21 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      {
+        "kdheepak/lazygit.nvim",
+        dependencies = {
+          "nvim-lua/plenary.nvim",
+        },
+        cmd = {
+          "LazyGit",
+          "LazyGitConfig",
+          "LazyGitCurrentFile",
+          "LazyGitFilter",
+          "LazyGitFilterCurrentFile",
+        },
+      },
+    },
 		config = function()
 			require("gitsigns").setup({
 				on_attach = function(bufnr)
@@ -44,6 +59,9 @@ return {
 
 					-- Text object
 					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
+
+          -- LazyGit
+          map("n", "<leader>gl", ":LazyGit", "Open LazyGit")
 				end,
 			})
 			-- keymap
@@ -62,21 +80,5 @@ return {
 				{ desc = "Toggle word diff { git }", silent = true }
 			)
 		end,
-	},
-	{
-		"kdheepak/lazygit.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		cmd = {
-			"LazyGit",
-			"LazyGitConfig",
-			"LazyGitCurrentFile",
-			"LazyGitFilter",
-			"LazyGitFilterCurrentFile",
-		},
-		keys = {
-			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "Open lazy git", silent = true },
-		},
 	},
 }

@@ -1,7 +1,6 @@
 return {
 	{
 		"rmagatti/auto-session",
-		event = "VeryLazy",
 		config = function()
 			require("auto-session").setup({
 				auto_restore_enabled = false,
