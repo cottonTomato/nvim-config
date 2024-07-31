@@ -14,36 +14,13 @@ return {
 				use_popups_for_input = false,
 				enable_opened_markers = false,
 				hide_root_node = true,
-				sources = {
-					"filesystem",
-					"buffers",
-					"git_status",
-					"document_symbols",
-				},
 				source_selector = {
 					winbar = true,
 					content_layout = "center",
 					tab_layout = "active",
-					sources = {
-						{
-							source = "filesystem",
-							display_name = "file",
-						},
-						{
-							source = "buffers",
-							display_name = "buf",
-						},
-						{
-							source = "git_status",
-							display_name = "git st",
-						},
-						{
-							source = "document_symbols",
-							display_name = "sym",
-						},
-					},
 				},
 				filesystem = {
+					hijack_netrw_behaviour = "disabled",
 					filtered_items = {
 						never_show = {
 							".git",
@@ -136,12 +113,6 @@ return {
 				"<leader>eg",
 				":Neotree focus git_status left toggle reveal<CR>",
 				{ desc = "Explore git status", silent = true }
-			)
-			keymap.set(
-				"n",
-				"<leader>es",
-				":Neotree focus document_symbols left toggle reveal<CR>",
-				{ desc = "Explore document symbols", silent = true }
 			)
 		end,
 	},

@@ -19,25 +19,16 @@ return {
 			opts.desc = "Restart LSP"
 			keymap.set("n", "<leader>l+", ":LspRestart<CR>", opts)
 
-			opts.desc = "Go to declaration"
-			keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-
-			opts.desc = "Go to type difination"
-			keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
-
-			opts.desc = "Go to definition"
-			keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-
 			opts.desc = "Rename symbol"
 			keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
 
 			opts.desc = "See code actions"
 			keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
 
-			opts.desc = "Go to previous diagnostic"
+			opts.desc = "Previous diagnostic"
 			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 
-			opts.desc = "Go to next diagnostic"
+			opts.desc = "Next diagnostic"
 			keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
 			opts.desc = "Show line diagnostics" -- TODO: Make hover look better

@@ -17,7 +17,6 @@ return {
 			end, { desc = "Next todo comment", silent = true })
 		end,
 	},
-	-- TODO: style this
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -26,6 +25,7 @@ return {
 			vim.o.timeoutlen = 500
 		end,
 		opts = {
+			preset = "modern",
 			icons = {
 				separator = " ",
 				mappings = false,

@@ -14,7 +14,7 @@ opt.expandtab = true
 opt.autoindent = true
 
 -- folding
--- vim.opt.
+vim.wo.foldlevel = 7
 
 -- line wrapping
 opt.wrap = false

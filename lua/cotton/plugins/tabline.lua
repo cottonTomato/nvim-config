@@ -30,6 +30,12 @@ return {
 							text_align = "center",
 							separator = true,
 						},
+						{
+							filetype = "Outline",
+							text = "Outline",
+							text_align = "center",
+							separator = true,
+						},
 					},
 					show_buffer_close_icons = false,
 					show_close_icon = false,

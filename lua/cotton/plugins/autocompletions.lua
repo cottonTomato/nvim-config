@@ -13,11 +13,13 @@ return {
 				build = "make install_jsregexp",
 				dependencies = { "rafamadriz/friendly-snippets" },
 			},
+			"onsails/lspkind.nvim",
 		},
 		event = "InsertEnter",
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			local lspkind = require("lspkind")
 
 			require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -51,6 +53,10 @@ return {
 				},
 				experimental = {
 					ghost_text = true,
+				},
+				---@diagnostic disable-next-line: missing-fields
+				formatting = {
+					format = lspkind.cmp_format(),
 				},
 			})
 		end,

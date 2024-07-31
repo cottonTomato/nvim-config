@@ -15,7 +15,25 @@ return {
 			})
 		end,
 	},
-	{ "chrisgrieser/nvim-spider", lazy = true },
+	{
+		"chrisgrieser/nvim-spider",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			local spider = require("spider")
+
+			-- keymap
+			local keymap = vim.keymap
+			keymap.set({ "n", "o", "x" }, "w", function()
+				spider.motion("w")
+			end, { desc = "Spider-w" })
+			keymap.set({ "n", "o", "x" }, "e", function()
+				spider.motion("e")
+			end, { desc = "Spider-e" })
+			keymap.set({ "n", "o", "x" }, "b", function()
+				spider.motion("b")
+			end, { desc = "Spider-b" })
+		end,
+	},
 	{
 		"gbprod/substitute.nvim",
 		dependencies = { "gbprod/yanky.nvim" },

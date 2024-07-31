@@ -11,4 +11,7 @@ return {
 			vim.cmd.colorscheme("gruvbox")
 		end,
 	},
+	-- { "sainnhe/everforest" },
+	-- { "sainnhe/sonokai" },
+	-- { "sainnhe/gruvbox-material" },
 }
