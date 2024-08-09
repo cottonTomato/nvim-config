@@ -25,7 +25,6 @@ return {
 			vim.o.timeoutlen = 500
 		end,
 		opts = {
-			preset = "modern",
 			icons = {
 				separator = " ",
 				mappings = false,

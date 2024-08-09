@@ -18,6 +18,8 @@ return {
 					"fish",
 					"gitignore",
 					"go",
+					"gomod",
+					"gosum",
 					"json",
 					"javascript",
 					"just",

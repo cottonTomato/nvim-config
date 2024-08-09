@@ -20,7 +20,7 @@ return {
 					tab_layout = "active",
 				},
 				filesystem = {
-					hijack_netrw_behaviour = "disabled",
+					hijack_netrw_behavior = "disabled",
 					filtered_items = {
 						never_show = {
 							".git",

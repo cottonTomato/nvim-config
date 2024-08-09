@@ -1,4 +1,4 @@
--- TODO: iron out details about rust, python, cpp, zig
+-- TODO: iron out details about rust, cpp, zig
 return {
 	{
 		"williamboman/mason.nvim",
@@ -23,32 +23,26 @@ return {
 
 			mason_lspconfig.setup({
 				ensure_installed = {
-					"bashls",
-					"clangd",
-					"gopls",
-					"lua_ls",
-					"pyright",
-					"rust_analyzer",
-					"tsserver",
-					"zls",
+					"clangd", -- c cpp
+					"gopls", -- go
+					"lua_ls", -- lua
+					"tsserver", -- ts, tsx
+					"zls", -- zig
 				},
 			})
 
 			mason_tool_installer.setup({
 				ensure_installed = {
-					"shfmt",
-					"clang-format",
-					"goimports",
-					"stylua",
-					"black",
-					"rustfmt",
-					"prettier",
-					"taplo",
-					"codespell",
-					-- "biome",
-					-- "golangci-lint",
-					-- "shellcheck",
-					-- "luacheck",
+					"shfmt", -- bash formatting
+					"clang-format", -- c cpp formatting
+					"goimports", -- go formatting
+					"golangci-lint", -- go linting
+					"stylua", -- lua formatting
+					"luacheck", -- lua linting
+					"prettier", -- js, ts formatting
+					"taplo", -- toml formatting
+					"codespell", -- spellings autocorrect
+					"biome", -- js, ts linting
 				},
 			})
 
