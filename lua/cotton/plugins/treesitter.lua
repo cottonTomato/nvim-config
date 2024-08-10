@@ -36,15 +36,6 @@ return {
 					"yaml",
 					"zig",
 				},
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "grr",
-						node_incremental = "gri",
-						scope_incremental = "grs",
-						node_decremental = "grd",
-					},
-				},
 				indent = { enable = true },
 				highlight = {
 					enable = true,
@@ -81,17 +72,6 @@ return {
 							["ip"] = { query = "@parameter.inner", desc = "inner parameter" },
 							["as"] = { query = "@block.outer", desc = "outer block" },
 							["is"] = { query = "@block.inner", desc = "inner block" },
-						},
-					},
-					swap = {
-						enable = true,
-						swap_next = {
-							["grp"] = "@parameter.inner",
-							["gr;"] = "@statement.outer",
-						},
-						swap_previous = {
-							["gRp"] = "@parameter.inner",
-							["gR;"] = "@statement.outer",
 						},
 					},
 					move = {

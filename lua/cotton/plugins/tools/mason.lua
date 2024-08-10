@@ -4,7 +4,12 @@ return {
 		"williamboman/mason.nvim",
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			{
+				"WhoIsSethDaniel/mason-tool-installer.nvim",
+				dependencies = {
+					"jay-babu/mason-nvim-dap.nvim",
+				},
+			},
 		},
 		config = function()
 			local mason = require("mason")
@@ -43,6 +48,9 @@ return {
 					"taplo", -- toml formatting
 					"codespell", -- spellings autocorrect
 					"biome", -- js, ts linting
+				},
+				integrations = {
+					["mason-nvim-dap"] = true,
 				},
 			})
 
