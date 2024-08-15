@@ -46,7 +46,7 @@ return {
 			dashboard.button("SPC e e", " 󰈝 [file explorer]", ":Neotree toggle<CR>"),
 			dashboard.button("SPC f f", " 󰈞 [find file]", ":Telescope find_files<CR>"),
 			dashboard.button("SPC s f", " 󰦛 [restore session]", ":Telescope session-lens<CR>"),
-			dashboard.button("SPC p l", " 󰒲 [open lazy]", ":Lazy<CR>"),
+			dashboard.button("SPC t l", " 󰒲 [open lazy]", ":Lazy<CR>"),
 			dashboard.button("q", " 󰩈 [quit nvim]", "<cmd>qa<CR>"),
 		}
 
@@ -59,9 +59,9 @@ return {
 
 		dashboard.section.footer.val = fortune_msg
 
-		dashboard.config.layout[1].val = 4
-		dashboard.config.layout[3].val = 8
-		table.insert(dashboard.config.layout, 5, { type = "padding", val = 4 })
+		dashboard.config.layout[1].val = 2
+		dashboard.config.layout[3].val = 4
+		table.insert(dashboard.config.layout, 5, { type = "padding", val = 2 })
 
 		alpha.setup(dashboard.config)
 	end,

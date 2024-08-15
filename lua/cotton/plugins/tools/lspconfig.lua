@@ -15,7 +15,7 @@ return {
 			local keymap = vim.keymap
 			local opts = { silent = true }
 
-			-- keybinds
+			-- keymap
 			opts.desc = "Restart LSP"
 			keymap.set("n", "<leader>l+", ":LspRestart<CR>", opts)
 

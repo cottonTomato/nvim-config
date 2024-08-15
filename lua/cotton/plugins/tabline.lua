@@ -49,7 +49,7 @@ return {
 				},
 			})
 
-			-- keybind
+			-- keymap
 			local keymap = vim.keymap
 
 			keymap.set("n", "gn", ":BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })

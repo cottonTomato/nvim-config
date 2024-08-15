@@ -43,6 +43,15 @@ return {
 				autotag = {
 					enable = true,
 				},
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						init_selection = "<leader>lii",
+						node_incremental = "<leader>lin",
+						scope_incremental = "<leader>lis",
+						node_decremental = "<leader>lid",
+					},
+				},
 			})
 
 			vim.wo.foldmethod = "expr"
@@ -62,14 +71,22 @@ return {
 						lookahead = true,
 						keymaps = {
 							["a;"] = { query = "@statement.outer", desc = "outer statement" },
-							["af"] = { query = "@function.outer", desc = "outer function" },
-							["if"] = { query = "@function.inner", desc = "inner function" },
+							["am"] = {
+								query = "@function.outer",
+								desc = "outer function/method",
+							},
+							["im"] = {
+								query = "@function.inner",
+								desc = "inner function/method",
+							},
 							["ac"] = { query = "@class.outer", desc = "outer class" },
 							["ic"] = { query = "@class.inner", desc = "inner class" },
 							["a/"] = { query = "@comment.outer", desc = "outer comment" },
 							["i/"] = { query = "@comment.inner", desc = "inner comment" },
 							["ap"] = { query = "@parameter.outer", desc = "outer parameter" },
 							["ip"] = { query = "@parameter.inner", desc = "inner parameter" },
+							["af"] = { query = "@call.outer", desc = "outer call" },
+							["if"] = { query = "@call.inner", desc = "inner call" },
 							["as"] = { query = "@block.outer", desc = "outer block" },
 							["is"] = { query = "@block.inner", desc = "inner block" },
 						},
@@ -108,8 +125,32 @@ return {
 							["[/"] = { query = "@comment.inner", desc = "Previous comment" },
 						},
 					},
+					swap = {
+						enable = true,
+						swap_previous = {
+							["<leader>lpp"] = { query = "@parameter.inner", desc = "swap previous parameter" },
+							["<leader>lmp"] = { query = "@parameter.inner", desc = "swap previous function" },
+							["<leader>l;p"] = { query = "@statement.outer", desc = "swap previous statement" },
+						},
+						swap_next = {
+							["<leader>lpn"] = { query = "@parameter.inner", desc = "swap next parameter" },
+							["<leader>lmn"] = { query = "@function.inner", desc = "swap next function" },
+							["<leader>l;n"] = { query = "@statement.outer", desc = "swap next statement" },
+						},
+					},
 				},
 			})
+
+			-- keymap
+			local keymap = vim.keymap
+			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+
+			keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+			keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+			keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr())
+			keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr())
+			keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr())
+			keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr())
 		end,
 	},
 }

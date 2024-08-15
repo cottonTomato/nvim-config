@@ -52,19 +52,20 @@ return {
 		end,
 	},
 	{
-		"knubie/vim-kitty-navigator",
-		build = "cp ./*.py ~/.config/kitty/",
-		init = function()
-			vim.g.kitty_navigator_no_mappings = 1
-		end,
+		"numToStr/Navigator.nvim",
 		config = function()
+			require("Navigator").setup({
+				disable_on_zoom = true,
+				mux = "auto",
+			})
+
 			-- keymap
 			local keymap = vim.keymap
 
-			keymap.set("n", "<M-h>", ":KittyNavigateLeft<CR>", { desc = "Move to window on left", silent = true })
-			keymap.set("n", "<M-j>", ":KittyNavigateDown<CR>", { desc = "Move to window below", silent = true })
-			keymap.set("n", "<M-k>", ":KittyNavigateUp<CR>", { desc = "Move to window above", silent = true })
-			keymap.set("n", "<M-l>", ":KittyNavigateRight<CR>", { desc = "Move to window on right", silent = true })
+			keymap.set({ "n", "t" }, "<A-h>", ":NavigatorLeft<CR>", { desc = "Navigate Left", silent = true })
+			keymap.set({ "n", "t" }, "<A-l>", ":NavigatorRight<CR>", { desc = "Navigate Right", silent = true })
+			keymap.set({ "n", "t" }, "<A-k>", ":NavigatorUp<CR>", { desc = "Navigate Up", silent = true })
+			keymap.set({ "n", "t" }, "<A-j>", ":NavigatorDown<CR>", { desc = "Navigate Down", silent = true })
 		end,
 	},
 }

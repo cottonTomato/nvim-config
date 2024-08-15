@@ -1,17 +1,25 @@
 return {
+	-- {
+	-- 	"ellisonleao/gruvbox.nvim",
+	-- 	event = "VimEnter",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("gruvbox").setup({
+	-- 			contrast = "soft",
+	-- 		})
+	--
+	-- 		vim.opt.background = "dark"
+	-- 		vim.cmd.colorscheme("gruvbox")
+	-- 	end,
+	-- },
 	{
-		"ellisonleao/gruvbox.nvim",
-		event = "VimEnter",
-		priority = 1000,
+		"rose-pine/neovim",
+		name = "rose-pine",
 		config = function()
-			require("gruvbox").setup({
-				contrast = "soft",
-			})
+			require("rose-pine").setup({})
+
 			vim.opt.background = "dark"
-			vim.cmd.colorscheme("gruvbox")
+			vim.cmd.colorscheme("rose-pine-moon")
 		end,
 	},
-	-- { "sainnhe/everforest" },
-	-- { "sainnhe/sonokai" },
-	-- { "sainnhe/gruvbox-material" },
 }
