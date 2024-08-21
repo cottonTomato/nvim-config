@@ -13,6 +13,7 @@ return {
 			require("lualine").setup({
 				options = {
 					globalstatus = true,
+					icons_enabled = false,
 				},
 				sections = {
 					lualine_c = {

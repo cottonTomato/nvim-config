@@ -11,7 +11,6 @@ return {
 		config = function()
 			local neotree = require("neo-tree")
 			neotree.setup({
-				use_popups_for_input = false,
 				enable_opened_markers = false,
 				hide_root_node = true,
 				source_selector = {
@@ -33,10 +32,10 @@ return {
 						with_markers = true,
 					},
 					icon = {
-						folder_closed = false,
-						folder_open = false,
-						folder_empty = false,
-						folder_empty_open = false,
+						folder_closed = "+",
+						folder_open = "-",
+						folder_empty = "*",
+						folder_empty_open = "*",
 					},
 					name = {
 						trailing_slash = true,

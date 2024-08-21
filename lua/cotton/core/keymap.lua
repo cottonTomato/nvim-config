@@ -9,7 +9,7 @@ keymap.set("n", "U", "<C-r>", { desc = "Redo" })
 keymap.set("n", "<C-r>", "U", { desc = "Restore last line" })
 
 -- highlights
-keymap.set("n", "z<CR>", ":nohls<CR>", { desc = "Clear highlights", silent = true })
+keymap.set("n", "zv", ":nohls<CR>", { desc = "Clear highlights", silent = true })
 
 -- mark
 keymap.set({ "n", "x" }, "`", "'", { desc = "Mark", noremap = true })
