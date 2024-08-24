@@ -70,6 +70,6 @@ return {
 
 		-- session workflow
 		opts.desc = "Search sessions"
-		keymap.set("n", "<leader>fo", "<CMD>Telescope session-lens<CR>", opts)
+		keymap.set("n", "<leader>sf", "<CMD>Telescope session-lens<CR>", opts)
 	end,
 }

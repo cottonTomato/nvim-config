@@ -1,4 +1,3 @@
--- TODO: iron out details about rust, cpp, zig
 return {
 	{
 		"williamboman/mason.nvim",
@@ -28,9 +27,11 @@ return {
 
 			mason_lspconfig.setup({
 				ensure_installed = {
-					"clangd", -- c cpp
+					"bashls", -- bash
+					"neocmake", -- cmake
 					"gopls", -- go
 					"lua_ls", -- lua
+					"pyright", -- python
 					"tsserver", -- ts, tsx
 					"zls", -- zig
 				},
@@ -38,16 +39,29 @@ return {
 
 			mason_tool_installer.setup({
 				ensure_installed = {
-					"shfmt", -- bash formatting
-					"clang-format", -- c cpp formatting
-					"goimports", -- go formatting
-					"golangci-lint", -- go linting
-					"stylua", -- lua formatting
-					"luacheck", -- lua linting
-					"prettier", -- js, ts formatting
-					"taplo", -- toml formatting
-					"codespell", -- spellings autocorrect
-					"biome", -- js, ts linting
+					-- formatters
+					"shfmt", -- bash
+					"clang-format", -- c cpp
+					"gersemi", -- cmake
+					"goimports", -- go
+					"stylua", -- lua
+					"mdformat", -- markdown
+					"prettier", -- js, ts, json, yaml
+					"sql-formatter", -- sql
+					"taplo", -- toml
+					"xmlformatter", -- xml
+					-- linters
+					"shellcheck", -- bash
+					"golangci-lint", -- go
+					"luacheck", -- lua
+					"markdownlint", -- markdown
+					"biome", -- js, ts
+					"sqlfluff", -- sql
+					-- linter + formatter
+					"buf", -- protobuf
+					"ruff", -- python
+					-- misc
+					"codespell", -- spellings linter
 				},
 				integrations = {
 					["mason-nvim-dap"] = true,
@@ -55,7 +69,7 @@ return {
 			})
 
 			-- keymap
-			vim.keymap.set("n", "<leader>mm", "<cmd>Mason<CR>", { desc = "Open Mason", silent = true })
+			vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open Mason", silent = true })
 		end,
 	},
 }

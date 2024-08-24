@@ -51,6 +51,32 @@ return {
 						capabilities = capabilities,
 					})
 				end,
+				["pyright"] = function()
+					lspconfig["pyright"].setup({
+						capabilities = capabilities,
+						settings = {
+							["pyright"] = {
+								disableOrganizeImports = true,
+							},
+						},
+					})
+				end,
+			})
+
+			lspconfig["clangd"].setup({
+				capabilities = capabilities,
+				cmd = { "clangd", "--clang-tidy" },
+			})
+
+			lspconfig["rust_analyzer"].setup({
+				capabilities = capabilities,
+				settings = {
+					["rust-analyzer"] = {
+						check = {
+							command = "clippy",
+						},
+					},
+				},
 			})
 		end,
 	},

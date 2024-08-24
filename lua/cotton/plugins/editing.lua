@@ -117,8 +117,15 @@ return {
 		version = "*",
 		opts = {
 			mappings = {
-				replace = "sc",
-				suffix_last = "p",
+				add = "s",
+				delete = "ds",
+				replace = "cs",
+				find = "",
+				find_left = "",
+				highlight = "",
+				update_n_lines = "",
+				suffix_last = "",
+				suffix_next = "",
 			},
 			respect_selection_type = true,
 			silent = true,

@@ -6,28 +6,30 @@ return {
 			local linter = require("lint")
 
 			linter.linter_by_ft = {
-				-- c = { "clang-tidy" },
-				-- cpp = { "clang-tidy" },
+				bash = { "shellcheck" },
 				go = { "golangcilint" },
-				lua = { "luacheck" },
-				-- rust = { "clippy" },
 				javascript = { "biomejs" },
-				typescript = { "biomejs" },
 				javascriptreact = { "biomejs" },
+				lua = { "luacheck" },
+				markdown = { "markdownlint" },
+				proto = { "buf_lint" },
+				python = { "ruff" },
+				sql = { "sqlfluff" },
+				typescript = { "biomejs" },
 				typescriptreact = { "biomejs" },
-				-- no nice linter for zig
 			}
 
-			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-			vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
-				group = lint_augroup,
+			vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
+				group = vim.api.nvim_create_augroup("lint", { clear = true }),
 				callback = function()
-					linter.try_lint()
+					linter.try_lint(nil, { ignore_errors = true })
+					linter.try_lint("codespell")
 				end,
+				desc = "Linting",
 			})
 
 			-- keymap
-			vim.keymap.set("n", "<leader>ll", linter.try_lint, { desc = "Lint file", silent = true })
+			vim.keymap.set("n", "<leader>ll", linter.try_lint, { desc = "Lint buffer", silent = true })
 		end,
 	},
 }
