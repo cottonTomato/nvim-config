@@ -51,10 +51,10 @@ return {
 					end, "Diff this ~")
 
 					-- Text object
-					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
+					map({ "o", "x" }, "ih", "<cmd><C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
 
 					-- LazyGit
-					map("n", "<leader>tg", ":LazyGit<CR>", "Open LazyGit")
+					map("n", "<leader>mg", "<cmd>LazyGit<CR>", "Open LazyGit")
 				end,
 			})
 
@@ -64,13 +64,13 @@ return {
 			keymap.set(
 				"n",
 				"<leader>gh",
-				":Gitsigns toggle_linehl<CR>",
+				"<cmd>Gitsigns toggle_linehl<CR>",
 				{ desc = "Toggle line highlight (git)", silent = true }
 			)
 			keymap.set(
 				"n",
 				"<leader>gw",
-				":Gitsigns toggle_word_diff<CR>",
+				"<cmd>Gitsigns toggle_word_diff<CR>",
 				{ desc = "Toggle word diff { git }", silent = true }
 			)
 		end,

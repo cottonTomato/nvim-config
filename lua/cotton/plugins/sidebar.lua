@@ -98,21 +98,39 @@ return {
 			keymap.set(
 				"n",
 				"<leader>ee",
-				":Neotree focus filesystem left toggle reveal<CR>",
-				{ desc = "Explore filesystem", silent = true }
+				"<cmd>Neotree focus filesystem left toggle reveal<CR>",
+				{ desc = "Explore filetree", silent = true }
 			)
 			keymap.set(
 				"n",
 				"<leader>eb",
-				":Neotree focus buffers left toggle reveal<CR>",
+				"<cmd>Neotree focus buffers left toggle reveal<CR>",
 				{ desc = "Explore buffers", silent = true }
 			)
 			keymap.set(
 				"n",
 				"<leader>eg",
-				":Neotree focus git_status left toggle reveal<CR>",
+				"<cmd>Neotree focus git_status left toggle reveal<CR>",
 				{ desc = "Explore git status", silent = true }
 			)
+		end,
+	},
+	{
+		"hedyhli/outline.nvim",
+		config = function()
+			require("outline").setup({
+				outline_window = {
+					position = "left",
+					width = 40,
+					relative_width = false,
+					auto_close = true,
+				},
+				outline_items = {
+					show_symbol_details = false,
+				},
+			})
+
+			vim.keymap.set("n", "<leader>eo", "<cmd>Outline<CR>", { desc = "Explore Outline", silent = true })
 		end,
 	},
 }

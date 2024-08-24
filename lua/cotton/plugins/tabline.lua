@@ -15,7 +15,7 @@ return {
 					separator_style = "thin",
 					close_command = "lua require('mini.bufremove').delete(%d, false)",
 					custom_filter = function(buf, buf_nums)
-						local filter_ft = { "neo-tree" }
+						local filter_ft = { "neo-tree", "alpha" }
 						for _, ft in ipairs(filter_ft) do
 							if vim.bo[buf].filetype == ft then
 								return false
@@ -53,38 +53,53 @@ return {
 			-- keymap
 			local keymap = vim.keymap
 
-			keymap.set("n", "gn", ":BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
-			keymap.set("n", "gp", ":BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
-			keymap.set("n", "<leader><space>", ":BufferLinePick<CR>", { desc = "Jump to buffer", silent = true })
+			keymap.set("n", "gn", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
+			keymap.set("n", "gp", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
+			keymap.set("n", "<leader><space>", "<cmd>BufferLinePick<CR>", { desc = "Jump to buffer", silent = true })
 
 			keymap.set(
 				"n",
 				"<leader>bl",
-				":BufferLineMoveNext<CR>",
+				"<cmd>BufferLineMoveNext<CR>",
 				{ desc = "Move buffer next in line", silent = true }
 			)
 			keymap.set(
 				"n",
 				"<leader>bh",
-				":BufferLineMovePrev<CR>",
+				"<cmd>BufferLineMovePrev<CR>",
 				{ desc = "Move buffer previous in line", silent = true }
 			)
 			keymap.set(
 				"n",
 				"<leader>be",
-				":BufferLineSortByExtension<CR>",
+				"<cmd>BufferLineSortByExtension<CR>",
 				{ desc = "Sort buffers by extension", silent = true }
 			)
 			keymap.set(
 				"n",
 				"<leader>bd",
-				":BufferLineSortByDirectory<CR>",
+				"<cmd>BufferLineSortByDirectory<CR>",
 				{ desc = "Sort buffers by directory", silent = true }
 			)
-			keymap.set("n", "<leader>bt", ":BufferLineSortByTabs<CR>", { desc = "sort buffers by tabs", silent = true })
+			keymap.set(
+				"n",
+				"<leader>bt",
+				"<cmd>BufferLineSortByTabs<CR>",
+				{ desc = "sort buffers by tabs", silent = true }
+			)
 
-			keymap.set("n", "<leader>bk", ":BufferLinePickClose<CR>", { desc = "Pick close buffers", silent = true })
-			keymap.set("n", "<leader>bn", ":BufferLineCloseOther<CR>", { desc = "Nuke other buffers", silent = true })
+			keymap.set(
+				"n",
+				"<leader>bk",
+				"<cmd>BufferLinePickClose<CR>",
+				{ desc = "Pick close buffers", silent = true }
+			)
+			keymap.set(
+				"n",
+				"<leader>bn",
+				"<cmd>BufferLineCloseOther<CR>",
+				{ desc = "Nuke other buffers", silent = true }
+			)
 		end,
 	},
 	{

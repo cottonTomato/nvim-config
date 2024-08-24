@@ -42,11 +42,11 @@ return {
 
 		-- TODO: add a jump to dotfiles button
 		dashboard.section.buttons.val = {
-			dashboard.button("n", "  [new file]", ":ene<CR>"),
-			dashboard.button("SPC e e", " 󰈝 [file explorer]", ":Neotree toggle<CR>"),
-			dashboard.button("SPC f f", " 󰈞 [find file]", ":Telescope find_files<CR>"),
-			dashboard.button("SPC s f", " 󰦛 [restore session]", ":Telescope session-lens<CR>"),
-			dashboard.button("SPC t l", " 󰒲 [open lazy]", ":Lazy<CR>"),
+			dashboard.button("n", "  [new file]", "<cmd>ene<CR>"),
+			dashboard.button("SPC e e", " 󰈝 [file explorer]", "<cmd>Neotree toggle<CR>"),
+			dashboard.button("SPC f f", " 󰈞 [find file]", "<cmd>Telescope find_files<CR>"),
+			dashboard.button("SPC s f", " 󰦛 [restore session]", "<cmd>Telescope session-lens<CR>"),
+			dashboard.button("SPC t l", " 󰒲 [open lazy]", "<cmd>Lazy<CR>"),
 			dashboard.button("q", " 󰩈 [quit nvim]", "<cmd>qa<CR>"),
 		}
 

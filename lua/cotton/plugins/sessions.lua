@@ -19,13 +19,8 @@ return {
 			-- keymap
 			local keymap = vim.keymap
 
-			keymap.set(
-				"n",
-				"<leader>ss",
-				":SessionSave<CR>",
-				{ desc = "Save session for auto session root dir", silent = true }
-			)
-			keymap.set("n", "<leader>sr", ":SessionRestore<CR>", { desc = "Restore session for cwd", silent = true })
+			keymap.set("n", "<leader>ms", "<cmd>SessionSave<CR>", { desc = "Save session", silent = true })
+			keymap.set("n", "<leader>mr", "<cmd>SessionRestore<CR>", { desc = "Restore session", silent = true })
 		end,
 	},
 }

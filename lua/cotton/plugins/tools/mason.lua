@@ -55,7 +55,7 @@ return {
 			})
 
 			-- keymap
-			vim.keymap.set("n", "<leader>tm", ":Mason<CR>", { desc = "Open Mason", silent = true })
+			vim.keymap.set("n", "<leader>mm", "<cmd>Mason<CR>", { desc = "Open Mason", silent = true })
 		end,
 	},
 }

@@ -17,7 +17,7 @@ return {
 
 			-- keymap
 			opts.desc = "Restart LSP"
-			keymap.set("n", "<leader>l+", ":LspRestart<CR>", opts)
+			keymap.set("n", "<leader>l+", "<cmd>LspRestart<CR>", opts)
 
 			opts.desc = "Rename symbol"
 			keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
@@ -31,11 +31,11 @@ return {
 			opts.desc = "Next diagnostic"
 			keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
-			opts.desc = "Show line diagnostics" -- TODO: Make hover look better
+			opts.desc = "Show line diagnostics"
 			keymap.set("n", "Z", vim.diagnostic.open_float, opts)
 
-			opts.desc = "Show documentation for what is under cursor"
-			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- TODO: Make hover look better
+			opts.desc = "Show documentation"
+			keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
 			local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
 			for type, icon in pairs(signs) do

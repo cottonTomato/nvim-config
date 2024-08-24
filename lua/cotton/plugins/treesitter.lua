@@ -3,54 +3,65 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		event = { "BufReadPre", "BufNewFile" },
 		build = ":TSUpdate",
-		dependencies = {
-			"windwp/nvim-ts-autotag",
-		},
 		config = function()
 			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
+					"arduino",
+					"asm",
 					"bash",
 					"c",
 					"cmake",
 					"cpp",
+					"css",
 					"dockerfile",
+					"editorconfig",
 					"fish",
+					"git_rebase",
+					"gitattributes",
+					"gitcommit",
 					"gitignore",
 					"go",
 					"gomod",
 					"gosum",
-					"json",
+					"gowork",
+					"hurl",
+					"html",
+					"java",
 					"javascript",
+					"jsonc",
+					"json",
 					"just",
+					"kconfig",
+					"latex",
+					"linkerscript",
 					"lua",
+					"luadoc",
 					"markdown",
 					"markdown_inline",
+					"meson",
+					"nginx",
+					"ninja",
+					"objc",
+					"pioasm",
+					"proto",
 					"python",
 					"rust",
+					"sql",
+					"ssh_config",
+					"swift",
 					"toml",
 					"tsx",
 					"typescript",
 					"vim",
 					"vimdoc",
+					"xml",
 					"yaml",
 					"zig",
 				},
 				indent = { enable = true },
 				highlight = {
 					enable = true,
-				},
-				autotag = {
-					enable = true,
-				},
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "<leader>lii",
-						node_incremental = "<leader>lin",
-						scope_incremental = "<leader>lis",
-						node_decremental = "<leader>lid",
-					},
 				},
 			})
 
@@ -70,7 +81,6 @@ return {
 						enable = true,
 						lookahead = true,
 						keymaps = {
-							["a;"] = { query = "@statement.outer", desc = "outer statement" },
 							["am"] = {
 								query = "@function.outer",
 								desc = "outer function/method",
@@ -83,12 +93,12 @@ return {
 							["ic"] = { query = "@class.inner", desc = "inner class" },
 							["a/"] = { query = "@comment.outer", desc = "outer comment" },
 							["i/"] = { query = "@comment.inner", desc = "inner comment" },
-							["ap"] = { query = "@parameter.outer", desc = "outer parameter" },
-							["ip"] = { query = "@parameter.inner", desc = "inner parameter" },
+							["aP"] = { query = "@parameter.outer", desc = "outer parameter" },
+							["iP"] = { query = "@parameter.inner", desc = "inner parameter" },
 							["af"] = { query = "@call.outer", desc = "outer call" },
 							["if"] = { query = "@call.inner", desc = "inner call" },
-							["as"] = { query = "@block.outer", desc = "outer block" },
-							["is"] = { query = "@block.inner", desc = "inner block" },
+							["aB"] = { query = "@block.outer", desc = "outer block" },
+							["iB"] = { query = "@block.inner", desc = "inner block" },
 						},
 					},
 					move = {
@@ -98,21 +108,25 @@ return {
 							["]m"] = { query = "@function.outer", desc = "Next function start" },
 							["]c"] = { query = "@class.outer", desc = "Next class start" },
 							["]s"] = { query = "@block.outer", desc = "Next block start" },
+							["]f"] = { query = "@call.inner", desc = "Next call start" },
 						},
 						goto_next_end = {
 							["]M"] = { query = "@function.outer", desc = "Next function end" },
 							["]C"] = { query = "@class.outer", desc = "Next class end" },
 							["]S"] = { query = "@block.outer", desc = "Next block end" },
+							["]F"] = { query = "@call.inner", desc = "Next call end" },
 						},
 						goto_previous_start = {
 							["[m"] = { query = "@function.outer", desc = "Previous function start" },
 							["[c"] = { query = "@class.outer", desc = "Previous class start" },
 							["[s"] = { query = "@block.outer", desc = "Previous block start" },
+							["[f"] = { query = "@call.inner", desc = "Previous call start" },
 						},
 						goto_previous_end = {
 							["[M"] = { query = "@function.outer", desc = "Previous function end" },
 							["[C"] = { query = "@class.outer", desc = "Previous block end" },
 							["[S"] = { query = "@block.outer", desc = "Previous block end" },
+							["[F"] = { query = "@call.inner", desc = "Previous call end" },
 						},
 						goto_next = {
 							["];"] = { query = "@statement.outer", desc = "Next statement" },
@@ -123,19 +137,6 @@ return {
 							["[;"] = { query = "@statement.outer", desc = "Previous statement" },
 							["[p"] = { query = "@parameter.inner", desc = "Previous parameter" },
 							["[/"] = { query = "@comment.inner", desc = "Previous comment" },
-						},
-					},
-					swap = {
-						enable = true,
-						swap_previous = {
-							["<leader>lpp"] = { query = "@parameter.inner", desc = "swap previous parameter" },
-							["<leader>lmp"] = { query = "@parameter.inner", desc = "swap previous function" },
-							["<leader>l;p"] = { query = "@statement.outer", desc = "swap previous statement" },
-						},
-						swap_next = {
-							["<leader>lpn"] = { query = "@parameter.inner", desc = "swap next parameter" },
-							["<leader>lmn"] = { query = "@function.inner", desc = "swap next function" },
-							["<leader>l;n"] = { query = "@statement.outer", desc = "swap next statement" },
 						},
 					},
 				},
@@ -151,6 +152,27 @@ return {
 			keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr())
 			keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr())
 			keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr())
+		end,
+	},
+	{
+		"RRethy/nvim-treesitter-textsubjects",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			---@diagnostic disable-next-line: missing-fields
+			require("nvim-treesitter.configs").setup({
+				textsubjects = {
+					enable = true,
+					keymaps = {
+						["."] = { "textsubjects-smart", desc = "Smart select container" },
+						["a;"] = { "textsubjects-container-outer", desc = "Select outer container" },
+						["i;"] = {
+							"textsubjects-container-inner",
+							desc = "Select inner containers",
+						},
+					},
+				},
+			})
 		end,
 	},
 }
