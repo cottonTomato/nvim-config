@@ -1,60 +1,97 @@
 return {
 	{
 		"numToStr/Navigator.nvim",
-		config = function()
-			require("Navigator").setup({
-				disable_on_zoom = true,
-				mux = "auto",
-			})
-
-			-- keymap
-			local keymap = vim.keymap
-
-			keymap.set({ "n", "t" }, "<A-h>", "<CMD>NavigatorLeft<CR>", { desc = "Navigate Left", silent = true })
-			keymap.set({ "n", "t" }, "<A-l>", "<CMD>NavigatorRight<CR>", { desc = "Navigate Right", silent = true })
-			keymap.set({ "n", "t" }, "<A-k>", "<CMD>NavigatorUp<CR>", { desc = "Navigate Up", silent = true })
-			keymap.set({ "n", "t" }, "<A-j>", "<CMD>NavigatorDown<CR>", { desc = "Navigate Down", silent = true })
-		end,
+		opts = {
+			disable_on_zoom = true,
+			mux = "auto",
+		},
+		keys = {
+			{
+				"<A-h>",
+				"<CMD>NavigatorLeft<CR>",
+				mode = { "n", "t" },
+				desc = "Navigate Left",
+				silent = true,
+			},
+			{
+				"<A-l>",
+				"<CMD>NavigatorRight<CR>",
+				mode = { "n", "t" },
+				desc = "Navigate Right",
+				silent = true,
+			},
+			{
+				"<A-k>",
+				"<CMD>NavigatorUp<CR>",
+				mode = { "n", "t" },
+				desc = "Navigate Up",
+				silent = true,
+			},
+			{
+				"<A-j>",
+				"<CMD>NavigatorDown<CR>",
+				mode = { "n", "t" },
+				desc = "Navigate Down",
+				silent = true,
+			},
+		},
 	},
 	{
 		"chrisgrieser/nvim-spider",
 		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			local spider = require("spider")
-
-			spider.setup({
-				skipInsignificantPunctuation = false,
-			})
-
-			-- keymap
-			local keymap = vim.keymap
-			keymap.set({ "n", "o", "x" }, "w", function()
-				spider.motion("w")
-			end, { desc = "Spider-w" })
-			keymap.set({ "n", "o", "x" }, "e", function()
-				spider.motion("e")
-			end, { desc = "Spider-e" })
-			keymap.set({ "n", "o", "x" }, "b", function()
-				spider.motion("b")
-			end, { desc = "Spider-b" })
-		end,
+		opts = {
+			skipInsignificantPunctuation = false,
+		},
+		keys = {
+			{
+				"w",
+				"<cmd>lua require('spider').motion('w')<CR>",
+				mode = { "n", "o", "x" },
+				desc = "Spider-w",
+				silent = true,
+			},
+			{
+				"e",
+				"<cmd>lua require('spider').motion('e')<CR>",
+				mode = { "n", "o", "x" },
+				desc = "Spider-e",
+				silent = true,
+			},
+			{
+				"b",
+				"<cmd>lua require('spider').motion('b')<CR>",
+				mode = { "n", "o", "x" },
+				desc = "Spider-b",
+				silent = true,
+			},
+		},
 	},
 	{
 		"echasnovski/mini.jump2d",
 		version = "*",
-		config = function()
-			local jump2d = require("mini.jump2d")
-			jump2d.setup({
-				silent = false,
-				mappings = {
-					start_jumping = "",
-				},
-			})
-
-			-- keymap
-			vim.keymap.set({ "n", "x" }, "z<cr>", function()
-				jump2d.start(jump2d.builtin_opts.word_start)
-			end, { desc = "Start word jump" })
-		end,
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			silent = false,
+			mappings = {
+				start_jumping = "gt",
+			},
+			allowed_lines = {
+				cursor_at = false,
+			},
+		},
+	},
+	{
+		"otavioschwanck/arrow.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			show_icons = true,
+			hide_handbook = false,
+			leader_key = "<cr>",
+			mappings = {
+				toggle = " ",
+				open_horizontal = "s",
+			},
+			index_keys = "fjdksla;cmrueiwoqp",
+		},
 	},
 }

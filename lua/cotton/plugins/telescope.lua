@@ -1,4 +1,3 @@
--- TODO: fzf like keymap
 return {
 	"nvim-telescope/telescope.nvim",
 	dependencies = {
@@ -11,65 +10,80 @@ return {
 	event = "VeryLazy",
 	config = function()
 		local telescope = require("telescope")
+		telescope.load_extension("fzf")
+		telescope.load_extension("frecency")
 
 		local trouble_telescope = require("trouble.sources.telescope")
+		local actions = require("telescope.actions")
 
 		telescope.setup({
-			path_display = "tail",
 			defaults = {
+				borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 				mappings = {
-					i = { ["<C-t>"] = trouble_telescope.open },
-					n = { ["<C-t>"] = trouble_telescope.open },
+					i = {
+						["<C-x>"] = false,
+						["<C-s>"] = actions.select_horizontal,
+						["<C-f>"] = false,
+						["<C-k>"] = false,
+						["<M-f>"] = false,
+						["<M-k>"] = false,
+						["<C-l>"] = false,
+						["<C-w>"] = false,
+						["<C-r><C-w>"] = false,
+						["<C-r><C-a>"] = false,
+						["<C-r><C-f>"] = false,
+						["<C-r><C-l>"] = false,
+						["<M-t>"] = trouble_telescope.open,
+					},
+					n = {
+						["<C-x>"] = false,
+						["<C-s>"] = actions.select_horizontal,
+						["<C-f>"] = false,
+						["<C-k>"] = false,
+						["<M-f>"] = false,
+						["<M-k>"] = false,
+						["<M-t>"] = trouble_telescope.open,
+					},
+				},
+			},
+			extensions = {
+				frecency = {
+					db_safe_mode = false,
 				},
 			},
 		})
-
-		telescope.load_extension("fzf")
-		telescope.load_extension("frecency")
 
 		-- keymap
 		local keymap = vim.keymap
 		local opts = { silent = true }
 
 		opts.desc = "Search files in cwd"
-		keymap.set("n", "<leader>ff", "<CMD>Telescope find_files<CR>", opts)
-
-		opts.desc = "Search recently opened files"
-		keymap.set("n", "<leader>fr", "<CMD>Telescope frecency workspace=CWD<CR>", opts)
+		keymap.set("n", "<leader>ff", "<cmd>Telescope frecency workspace=CWD theme=ivy<CR>", opts)
 
 		opts.desc = "Livegrep strings in cwd"
-		keymap.set("n", "<leader>/", "<CMD>Telescope live_grep<CR>", opts)
-
-		opts.desc = "Grep string under cursor in cwd"
-		keymap.set("n", "<leader>fg", "<CMD>Telescope grep_string<CR>", opts)
+		keymap.set("n", "<leader>/", "<CMD>Telescope live_grep theme=ivy<CR>", opts)
 
 		opts.desc = "Search help tags"
-		keymap.set("n", "<leader>fH", "<CMD>Telescope help_tags<CR>", opts)
+		keymap.set("n", "<leader>fh", "<CMD>Telescope help_tags theme=ivy<CR>", opts)
 
 		opts.desc = "Search man pages"
-		keymap.set("n", "<leader>fh", "<CMD>Telescope man_pages sections=ALL<CR>", opts)
-
-		opts.desc = "Search marks"
-		keymap.set("n", "<leader>fm", "<CMD>Telescope marks<CR>", opts)
+		keymap.set("n", "<leader>fm", "<CMD>Telescope man_pages sections=ALL theme=ivy<CR>", opts)
 
 		opts.desc = "Search jumplist"
-		keymap.set("n", "<leader>fj", "<CMD>Telescope jumplist<CR>", opts)
-
-		opts.desc = "Search quickfixlist"
-		keymap.set("n", "<leader>fk", "<CMD>Telescope quickfix<CR>", opts)
-
-		opts.desc = "Search loclist"
-		keymap.set("n", "<leader>fl", "<CMD>Telescope loclist<CR>", opts)
+		keymap.set("n", "<leader>fj", "<CMD>Telescope jumplist theme=ivy<CR>", opts)
 
 		-- lsp bindings
 		opts.desc = "Search document symbols"
-		keymap.set("n", "<leader>fs", "<CMD>Telescope lsp_document_symbols<CR>", opts)
+		keymap.set("n", "<leader>fs", "<CMD>Telescope lsp_document_symbols theme=ivy<CR>", opts)
 
 		opts.desc = "Search workspace symbols"
-		keymap.set("n", "<leader>fS", "<CMD>Telescope lsp_workspace_symbols<CR>", opts)
+		keymap.set("n", "<leader>fS", "<CMD>Telescope lsp_workspace_symbols theme=ivy<CR>", opts)
 
-		-- session workflow
-		opts.desc = "Search sessions"
-		keymap.set("n", "<leader>sf", "<CMD>Telescope session-lens<CR>", opts)
+		opts.desc = "Search workspace references"
+		keymap.set("n", "<leader>fr", "<CMD>Telescope lsp_references theme=ivy<CR>", opts)
+
+		-- git
+		opts.desc = "Search buffer commits"
+		keymap.set("n", "<leader>fc", "<CMD>Telescope git_bcommits theme=ivy<CR>", opts)
 	end,
 }

@@ -54,8 +54,8 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
-					["<C-f>"] = cmp.mapping.scroll_docs(-4),
-					["<C-b>"] = cmp.mapping.scroll_docs(4),
+					["<C-u>"] = cmp.mapping.scroll_docs(-4),
+					["<C-d>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-/>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -94,7 +94,6 @@ return {
 
 			autopairs.setup({
 				check_ts = true,
-				ts_config = {},
 			})
 
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")

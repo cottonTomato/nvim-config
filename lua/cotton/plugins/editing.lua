@@ -68,48 +68,51 @@ return {
 	{
 		"chrisgrieser/nvim-various-textobjs",
 		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			local textobjs = require("various-textobjs")
-
-			textobjs.setup({
-				useDefaultKeymaps = true,
-				disabledKeymaps = {
-					"r",
-					"im",
-					"am",
-					"il",
-					"al",
-					"ie",
-					"ae",
-					"iC",
-					"aC",
-					"ic",
-					"ac",
-					"i#",
-					"a#",
-					"ix",
-					"ax",
-					"iD",
-					"aD",
-					"iP",
-					"aP",
-					"iy",
-					"ay",
-					"iN",
-					"aN",
-				},
-				notifyNotFound = false,
-			})
-
-			-- keymap
-
-			vim.keymap.set({ "o", "x" }, "iM", function()
-				textobjs.chainMember("inner")
-			end, { desc = "inner method chain" })
-			vim.keymap.set({ "o", "x" }, "aM", function()
-				textobjs.chainMember("outer")
-			end, { desc = "outer method chain" })
-		end,
+		opts = {
+			useDefaultKeymaps = true,
+			disabledKeymaps = {
+				"r",
+				"im",
+				"am",
+				"il",
+				"al",
+				"ie",
+				"ae",
+				"iC",
+				"aC",
+				"ic",
+				"ac",
+				"i#",
+				"a#",
+				"ix",
+				"ax",
+				"iD",
+				"aD",
+				"iP",
+				"aP",
+				"iy",
+				"ay",
+				"iN",
+				"aN",
+			},
+			notifyNotFound = false,
+		},
+		keys = {
+			{
+				"iM",
+				"<cmd>lua require('various-textobjs').chainMember('inner')<cr>",
+				mode = { "o", "x" },
+				desc = "inner method chain",
+				silent = true,
+			},
+			{
+				"aM",
+				"<cmd>lua require('various-textobjs').chainMember('outer')<cr>",
+				mode = { "o", "x" },
+				desc = "outer method chain",
+				silent = true,
+			},
+		},
 	},
 	{
 		"echasnovski/mini.surround",
@@ -135,9 +138,7 @@ return {
 		"windwp/nvim-ts-autotag",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("nvim-ts-autotag").setup()
-		end,
+		opts = {},
 	},
 	{
 		"echasnovski/mini.move",
@@ -160,11 +161,6 @@ return {
 		"echasnovski/mini.align",
 		version = "*",
 		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			mappings = {
-				start = "gq",
-				start_with_preview = "gw",
-			},
-		},
+		opts = {},
 	},
 }

@@ -13,7 +13,6 @@ return {
 			require("lualine").setup({
 				options = {
 					globalstatus = true,
-					icons_enabled = false,
 				},
 				sections = {
 					lualine_c = {
@@ -23,6 +22,7 @@ return {
 						end,
 					},
 					lualine_x = {
+						{ "overseer" },
 						{
 							require("lazy.status").updates,
 							cond = require("lazy.status").has_updates,

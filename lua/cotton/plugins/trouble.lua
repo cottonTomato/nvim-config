@@ -4,54 +4,85 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
 		event = "VeryLazy",
 		cmd = "Trouble",
-		config = function()
-			require("trouble").setup({
-				focus = true,
-				warn_no_results = false,
-				keys = {
-					["<cr>"] = "jump_close",
-					o = "jump",
+		opts = {
+			focus = true,
+			warn_no_results = false,
+			keys = {
+				["<cr>"] = "jump_close",
+				o = "jump",
+			},
+			win = {
+				size = {
+					height = 15,
 				},
-			})
-
-			-- keymap
-			local keymap = vim.keymap
-			local opts = { silent = true }
-
-			opts.desc = "Explore workspace todos"
-			keymap.set("n", "<leader>xw", "<cmd>Trouble todo toggle<CR>", opts)
-
-			opts.desc = "Explore buffer diagnostics"
-			keymap.set("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", opts)
-
-			opts.desc = "Explore workspace diagnostics"
-			keymap.set(
-				"n",
+			},
+		},
+		keys = {
+			{
+				"<leader>xt",
+				"<cmd>Trouble todo toggle<CR>",
+				mode = "n",
+				desc = "Explore workspace todos",
+				silent = true,
+			},
+			{
+				"<leader>xd",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<CR>",
+				mode = "n",
+				desc = "Explore buffer diagnostics",
+				silent = true,
+			},
+			{
 				"<leader>xD",
 				"<cmd>Trouble diagnostics toggle filter.severity=vim.diagnostic.severity.ERROR<CR>",
-				opts
-			)
-
-			opts.desc = "Go to declaration"
-			keymap.set("n", "gD", "<cmd>Trouble lsp_declarations toggle<CR>", opts)
-
-			opts.desc = "Go to definition"
-			keymap.set("n", "gd", "<cmd>Trouble lsp_definitions toggle<CR>", opts)
-
-			opts.desc = "Go to type definition"
-			keymap.set("n", "gP", "<cmd>Trouble lsp_type_definitions toggle<CR>", opts)
-
-			opts.desc = "Explore implementations"
-			keymap.set("n", "<leader>xi", "<cmd>Trouble lsp_implementations toggle<CR>", opts)
-
-			opts.desc = "Explore references"
-			keymap.set("n", "<leader>xr", "<cmd>Trouble lsp_references toggle<CR>", opts)
-
-			opts.desc = "Explore telescope"
-			keymap.set("n", "<leader>xs", "<cmd>Trouble telescope toggle<CR>", opts)
-
-			opts.desc = "Explore symbol"
-			keymap.set("n", "<leader>xx", "<cmd>Trouble lsp toggle<CR>", opts)
-		end,
+				mode = "n",
+				desc = "Explore workspace diagnostics",
+				silent = true,
+			},
+			{ "gD", "<cmd>Trouble lsp_declarations toggle<CR>", mode = "n", desc = "Go to declaration", silent = true },
+			{ "gd", "<cmd>Trouble lsp_definitions toggle<CR>", mode = "n", desc = "Go to definition", silent = true },
+			{
+				"gT",
+				"<cmd>Trouble lsp_type_definitions toggle<CR>",
+				mode = "n",
+				desc = "Go to type definition",
+				silent = true,
+			},
+			{
+				"<leader>xi",
+				"<cmd>Trouble lsp_implementations toggle<CR>",
+				mode = "n",
+				desc = "Explore implementations",
+				silent = true,
+			},
+			{
+				"<leader>xr",
+				"<cmd>Trouble lsp_references toggle<CR>",
+				mode = "n",
+				desc = "Explore references",
+				silent = true,
+			},
+			{
+				"<leader>xc",
+				"<cmd>Trouble lsp_incoming_calls toggle<CR>",
+				mode = "n",
+				desc = "Explore incoming calls",
+				silent = true,
+			},
+			{
+				"<leader>xC",
+				"<cmd>Trouble lsp_outgoing_calls toggle<CR>",
+				mode = "n",
+				desc = "Explore outgoing calls",
+				silent = true,
+			},
+			{
+				"<leader>xs",
+				"<cmd>Trouble telescope toggle<CR>",
+				mode = "n",
+				desc = "Explore telescope",
+				silent = true,
+			},
+		},
 	},
 }

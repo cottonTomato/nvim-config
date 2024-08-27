@@ -30,14 +30,7 @@ return {
 							text_align = "center",
 							separator = true,
 						},
-						{
-							filetype = "Outline",
-							text = "Outline",
-							text_align = "center",
-							separator = true,
-						},
 					},
-					show_buffer_icons = false,
 					show_buffer_close_icons = false,
 					show_close_icon = false,
 					always_show_bufferline = false,
@@ -55,7 +48,7 @@ return {
 
 			keymap.set("n", "gn", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
 			keymap.set("n", "gp", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
-			keymap.set("n", "<leader><space>", "<cmd>BufferLinePick<CR>", { desc = "Jump to buffer", silent = true })
+			keymap.set("n", "<leader><leader>", "<cmd>BufferLinePick<CR>", { desc = "Jump to buffer", silent = true })
 
 			keymap.set(
 				"n",

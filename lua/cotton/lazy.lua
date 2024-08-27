@@ -21,4 +21,9 @@ require("lazy").setup({ { import = "cotton.plugins" }, { import = "cotton.plugin
 		notify = true,
 		enabled = true,
 	},
+	ui = {
+		border = "single",
+		title = "Lazy.nvim",
+		pills = false,
+	},
 })
