@@ -57,7 +57,7 @@ return {
 			local path = vim.uv.cwd() .. "/.git"
 			local ok, err = vim.uv.fs_stat(path)
 			if ok then
-				vim.keymap.set("n", "<leader>g", "<cmd>LazyGit<CR>", { desc = "Open LazyGit", silent = true })
+				vim.keymap.set("n", "<leader><leader>g", "<cmd>LazyGit<CR>", { desc = "Open LazyGit", silent = true })
 			end
 		end,
 	},

@@ -17,7 +17,7 @@ return {
 
 			-- keymap
 			opts.desc = "Restart LSP"
-			keymap.set("n", "<leader>l+", "<cmd>LspRestart<CR>", opts)
+			keymap.set("n", "<leader>+", "<cmd>LspRestart<CR>", opts)
 
 			opts.desc = "Rename symbol"
 			keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)

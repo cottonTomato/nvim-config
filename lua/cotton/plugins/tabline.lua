@@ -48,7 +48,7 @@ return {
 
 			keymap.set("n", "gn", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
 			keymap.set("n", "gp", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
-			keymap.set("n", "<leader><leader>", "<cmd>BufferLinePick<CR>", { desc = "Jump to buffer", silent = true })
+			keymap.set("n", "<leader><cr>", "<cmd>BufferLinePick<CR>", { desc = "Jump to buffer", silent = true })
 
 			keymap.set(
 				"n",

@@ -33,7 +33,7 @@ return {
 					"gopls", -- go
 					"lua_ls", -- lua
 					"pyright", -- python
-					"tsserver", -- ts, tsx
+					"ts_ls", -- ts, tsx
 					"zls", -- zig
 				},
 			})
@@ -70,7 +70,7 @@ return {
 			})
 
 			-- keymap
-			vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Open Mason", silent = true })
+			vim.keymap.set("n", "<leader><leader>m", "<cmd>Mason<CR>", { desc = "Open Mason", silent = true })
 		end,
 	},
 }

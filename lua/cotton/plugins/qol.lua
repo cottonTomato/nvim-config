@@ -95,7 +95,7 @@ return {
 		submodules = false,
 		event = { "BufReadPre", "BufNewFile" },
 		cmd = { "Browse" },
-		keys = { { "<leader>o", "<cmd>Browse<cr>", mode = { "n", "x" }, desc = "Open in browser" } },
+		keys = { { "<leader><leader>o", "<cmd>Browse<cr>", mode = { "n", "x" }, desc = "Open in browser" } },
 		opts = { handler_options = { search_engine = "https://search.brave.com/search?q=" } },
 	},
 	{ "echasnovski/mini.cursorword", version = "*", event = { "BufReadPre", "BufNewFile" }, opts = {} },
@@ -109,5 +109,10 @@ return {
 				object_scope_with_border = "",
 			},
 		},
+	},
+	{
+		"nmac427/guess-indent.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {},
 	},
 }

@@ -57,6 +57,18 @@ return {
 			keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", { desc = "Paste after", silent = true })
 			keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)", { desc = "Paste before", silent = true })
 			keymap.set(
+				{ "n", "x" },
+				"]P",
+				"<Plug>(YankyPutIndentAfterLinewise)",
+				{ desc = "Paste after linewise", silent = true }
+			)
+			keymap.set(
+				{ "n", "x" },
+				"[P",
+				"<Plug>(YankyPutIndentBeforeLinewise)",
+				{ desc = "Paste before linewise", silent = true }
+			)
+			keymap.set(
 				"n",
 				"<C-p>",
 				"<Plug>(YankyPreviousEntry)",

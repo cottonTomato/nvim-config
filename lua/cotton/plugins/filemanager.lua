@@ -1,3 +1,4 @@
+-- TODO: swtich back to oil
 return {
 	{
 		"echasnovski/mini.files",
@@ -10,7 +11,7 @@ return {
 		},
 		keys = {
 			{
-				"<leader>ef",
+				"<leader><leader>f",
 				"<cmd>lua require('mini.files').open()<cr>",
 				mode = "n",
 				desc = "Explore file system",

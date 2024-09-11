@@ -11,7 +11,7 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.keymap.set("n", "<leader>z", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
+vim.keymap.set("n", "<leader><leader>z", "<cmd>Lazy<CR>", { desc = "Open Lazy" })
 
 require("lazy").setup({ { import = "cotton.plugins" }, { import = "cotton.plugins.tools" } }, {
 	change_detection = {
@@ -24,6 +24,5 @@ require("lazy").setup({ { import = "cotton.plugins" }, { import = "cotton.plugin
 	ui = {
 		border = "single",
 		title = "Lazy.nvim",
-		pills = false,
 	},
 })
