@@ -4,9 +4,8 @@ return {
 		name = "rose-pine",
 		event = "VimEnter",
 		priority = 100,
-		config = function()
-			require("rose-pine").setup({})
-
+		opts = {},
+		init = function()
 			vim.opt.background = "dark"
 			vim.cmd.colorscheme("rose-pine-moon")
 		end,
@@ -18,8 +17,7 @@ return {
 	},
 	{
 		"stevearc/dressing.nvim",
-		event = "VimEnter",
-		priority = 100,
+		event = "VeryLazy",
 		opts = {
 			input = {
 				border = "single",
@@ -33,29 +31,46 @@ return {
 		},
 	},
 	{
-		"echasnovski/mini.notify",
+		"j-hui/fidget.nvim",
+		event = "VeryLazy",
+		opts = {
+			notification = {
+				override_vim_notify = true,
+				view = {
+					stack_upwards = false,
+				},
+				window = {
+					align = "top",
+				},
+			},
+		},
+		keys = {
+			{
+				"<leader><leader>?",
+				"<cmd>Fidget history<cr>",
+				mode = "n",
+				desc = "Notification history",
+				silent = true,
+			},
+		},
+	},
+	{ "echasnovski/mini.cursorword", version = "*", event = { "BufReadPre", "BufNewFile" }, opts = {} },
+	{
+		"echasnovski/mini.indentscope",
 		version = "*",
-		event = "VimEnter",
-		priority = 100,
-		config = function()
-			local notify = require("mini.notify")
-			notify.setup({
-				content = {
-					format = function(notif)
-						local time = vim.fn.strftime("%H:%M", math.floor(notif.ts_update))
-						local icon = ({ ERROR = "E", WARN = "W", INFO = "I", TRACE = "T", DEBUG = "D" })[notif.level]
-						return string.format("%s | %s: %-20s", time, icon, notif.msg)
-					end,
-				},
-				lsp_progress = {
-					enable = false,
-				},
-			})
-
-			vim.notify = notify.make_notify()
-
-			-- keymap
-			vim.keymap.set("n", "<leader>?", notify.show_history, { desc = "Notifications", silent = true })
-		end,
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			mappings = {
+				object_scope = "",
+				object_scope_with_border = "",
+			},
+			draw = {
+				delay = 100,
+				priority = 2,
+				animation = function(s, n)
+					return s / n * 20
+				end,
+			},
+		},
 	},
 }

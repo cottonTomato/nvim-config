@@ -93,22 +93,9 @@ return {
 		"chrishrb/gx.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		submodules = false,
-		event = { "BufReadPre", "BufNewFile" },
 		cmd = { "Browse" },
 		keys = { { "<leader><leader>o", "<cmd>Browse<cr>", mode = { "n", "x" }, desc = "Open in browser" } },
 		opts = { handler_options = { search_engine = "https://search.brave.com/search?q=" } },
-	},
-	{ "echasnovski/mini.cursorword", version = "*", event = { "BufReadPre", "BufNewFile" }, opts = {} },
-	{
-		"echasnovski/mini.indentscope",
-		version = "*",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			mappings = {
-				object_scope = "",
-				object_scope_with_border = "",
-			},
-		},
 	},
 	{
 		"nmac427/guess-indent.nvim",

@@ -5,77 +5,147 @@ return {
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
-		config = function()
-			local comment = require("Comment")
-			local ts_context_commentstring = require("ts_context_commentstring.integrations.comment_nvim")
-
-			---@diagnostic disable-next-line: missing-fields
-			comment.setup({
-				---@diagnostic disable-next-line: missing-fields
+		opts = function()
+			return {
 				toggler = {
 					block = "gbb",
 				},
-				pre_hook = ts_context_commentstring.create_pre_hook(),
-			})
+				pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+			}
 		end,
 	},
 	{
 		"gbprod/substitute.nvim",
 		dependencies = { "gbprod/yanky.nvim" },
 		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			local substitute = require("substitute")
-			local exchange = require("substitute.exchange")
-
-			substitute.setup({
+		opts = function()
+			return {
 				on_substitute = require("yanky.integration").substitute(),
-			})
-
-			-- keymap
-			local keymap = vim.keymap
-
-			keymap.set("n", "gs", substitute.operator, { desc = "Substitute", silent = true })
-			keymap.set("n", "gss", substitute.line, { desc = "Substitute line", silent = true })
-			keymap.set("n", "gS", substitute.eol, { desc = "Substitute to EOL", silent = true })
-			keymap.set("x", "gs", substitute.visual, { desc = "Substitute", silent = true })
-
-			keymap.set("n", "gx", exchange.operator, { desc = "Exchange", silent = true })
-			keymap.set("n", "gxx", exchange.line, { desc = "Exchange line", silent = true })
-			keymap.set("n", "gxc", exchange.cancel, { desc = "Exchange cancel", silent = true })
-			keymap.set("x", "gx", exchange.visual, { desc = "Exchange", silent = true })
+			}
 		end,
+		keys = {
+			{
+				"gs",
+				function()
+					require("substitute").operator()
+				end,
+				mode = "n",
+				desc = "Substitute",
+				silent = true,
+			},
+			{
+				"gss",
+				function()
+					require("substitute").line()
+				end,
+				mode = "n",
+				desc = "Substitute line",
+				silent = true,
+			},
+			{
+				"gS",
+				function()
+					require("substitute").eol()
+				end,
+				mode = "n",
+				desc = "Substitute to EOL",
+				silent = true,
+			},
+			{
+				"gs",
+				function()
+					require("substitute").visual()
+				end,
+				mode = "x",
+				desc = "Substitute",
+				silent = true,
+			},
+			{
+				"gx",
+				function()
+					require("substitute.exchange").operator()
+				end,
+				mode = "n",
+				desc = "Exchange",
+				silent = true,
+			},
+			{
+				"gxx",
+				function()
+					require("substitute.exchange").line()
+				end,
+				mode = "n",
+				desc = "Exchange line",
+				silent = true,
+			},
+			{
+				"gxc",
+				function()
+					require("substitute.exchange").cancel()
+				end,
+				mode = "n",
+				desc = "Substitute cancel",
+				silent = true,
+			},
+			{
+				"gx",
+				function()
+					require("substitute.exchange").visual()
+				end,
+				mode = "x",
+				desc = "Substitute",
+				silent = true,
+			},
+		},
 	},
 	{
 		"gbprod/yanky.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("yanky").setup()
-
-			-- keymap
-			local keymap = vim.keymap
-
-			keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", { desc = "Paste after", silent = true })
-			keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)", { desc = "Paste before", silent = true })
-			keymap.set(
-				{ "n", "x" },
+		opts = {},
+		keys = {
+			{
+				"p",
+				"<Plug>(YankyPutAfter)",
+				mode = { "n", "x" },
+				desc = "Paste after",
+				silent = true,
+			},
+			{
+				"P",
+				"<Plug>(YankyPutBefore)",
+				mode = { "n", "x" },
+				desc = "Paste before",
+				silent = true,
+			},
+			{
 				"]P",
 				"<Plug>(YankyPutIndentAfterLinewise)",
-				{ desc = "Paste after linewise", silent = true }
-			)
-			keymap.set(
-				{ "n", "x" },
+				mode = { "n", "x" },
+				desc = "Paste after linewise",
+				silent = true,
+			},
+			{
 				"[P",
 				"<Plug>(YankyPutIndentBeforeLinewise)",
-				{ desc = "Paste before linewise", silent = true }
-			)
-			keymap.set(
-				"n",
+				mode = { "n", "x" },
+				desc = "Previous entry in kill ring",
+				silent = true,
+			},
+			{
 				"<C-p>",
 				"<Plug>(YankyPreviousEntry)",
-				{ desc = "Previous entry in kill ring", silent = true }
-			)
-			keymap.set("n", "<C-n>", "<Plug>(YankyNextEntry)", { desc = "Next entry in Kill ring", silent = true })
-		end,
+				mode = "n",
+				desc = "Paste after",
+				silent = true,
+			},
+			{
+				"<C-n>",
+				"<Plug>(YankyNextEntry)",
+				mode = "n",
+				desc = "Next entry in Kill ring",
+				silent = true,
+			},
+		},
 	},
 	{
 		"chrisgrieser/nvim-various-textobjs",

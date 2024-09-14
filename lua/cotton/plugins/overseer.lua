@@ -1,10 +1,6 @@
 return {
 	{
 		"stevearc/overseer.nvim",
-		dependencies = {
-			"echasnovski/mini.notify",
-			"stevearc/dressing.nvim",
-		},
 		opts = {
 			task_list = {
 				min_height = 15,

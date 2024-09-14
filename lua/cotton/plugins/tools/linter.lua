@@ -1,6 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-lint",
+		dependencies = "WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			local linter = require("lint")

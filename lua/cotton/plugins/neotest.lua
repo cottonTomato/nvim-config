@@ -11,9 +11,21 @@ return {
 			"nvim-neotest/neotest-plenary",
 			"nvim-neotest/neotest-python",
 			"marilari88/neotest-vitest",
+			"rouge8/neotest-rust",
 			"lawrence-laz/neotest-zig",
 		},
-		ft = { "go", "cpp", "lua", "zig", "python", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+		ft = {
+			"cpp",
+			"go",
+			"lua",
+			"javascript",
+			"javascriptreact",
+			"python",
+			"typescript",
+			"typescriptreact",
+			"rust",
+			"zig",
+		},
 		config = function()
 			local neotest = require("neotest")
 
@@ -25,7 +37,8 @@ return {
 					require("neotest-plenary"),
 					require("neotest-python"),
 					require("neotest-vitest"),
-					require("neotest-zig")(),
+					require("neotest-rust"),
+					require("neotest-zig").setup({}),
 				},
 				quickfix = {
 					open = function()
@@ -87,7 +100,18 @@ return {
 	{
 		"andythigpen/nvim-coverage",
 		requires = "nvim-lua/plenary.nvim",
-		ft = { "go", "cpp", "lua", "zig", "python", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+		ft = {
+			"cpp",
+			"go",
+			"lua",
+			"javascript",
+			"typescript",
+			"python",
+			"javascriptreact",
+			"typescriptreact",
+			"rust",
+			"zig",
+		},
 		opts = {
 			auto_reload = true,
 			summary = {

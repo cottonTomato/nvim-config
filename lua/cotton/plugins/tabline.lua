@@ -4,128 +4,110 @@ return {
 		version = "*",
 		dependencies = { "nvim-tree/nvim-web-devicons", "echasnovski/mini.bufremove" },
 		event = "VeryLazy",
-		config = function()
-			local bufferline = require("bufferline")
-
-			bufferline.setup({
-				options = {
-					modified_icon = "[+]",
-					left_trunc_marker = "<-",
-					right_trunc_marker = "->",
-					separator_style = "thin",
-					close_command = "lua require('mini.bufremove').delete(%d, false)",
-					custom_filter = function(buf, buf_nums)
-						local filter_ft = { "neo-tree", "alpha" }
-						for _, ft in ipairs(filter_ft) do
-							if vim.bo[buf].filetype == ft then
-								return false
-							end
+		opts = {
+			options = {
+				modified_icon = "[+]",
+				left_trunc_marker = "<-",
+				right_trunc_marker = "->",
+				separator_style = "thin",
+				close_command = "lua require('mini.bufremove').delete(%d, false)",
+				custom_filter = function(buf, _)
+					local filter_ft = { "neo-tree", "alpha" }
+					for _, ft in ipairs(filter_ft) do
+						if vim.bo[buf].filetype == ft then
+							return false
 						end
-						return true
-					end,
-					offsets = {
-						{
-							filetype = "neo-tree",
-							text = "Explorer",
-							text_align = "center",
-							separator = true,
-						},
-					},
-					show_buffer_close_icons = false,
-					show_close_icon = false,
-					always_show_bufferline = false,
-					hover = { enabled = false },
+					end
+					return true
+				end,
+				show_buffer_close_icons = false,
+				show_close_icon = false,
+				always_show_bufferline = false,
+				hover = { enabled = false },
+			},
+			highlights = {
+				indicator_selected = {
+					fg = "#eb6f92",
 				},
-				highlights = {
-					indicator_selected = {
-						fg = "#eb6f92",
-					},
-				},
-			})
-
-			-- keymap
-			local keymap = vim.keymap
-
-			keymap.set("n", "gn", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
-			keymap.set("n", "gp", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
-			keymap.set("n", "<leader><cr>", "<cmd>BufferLinePick<CR>", { desc = "Jump to buffer", silent = true })
-
-			keymap.set(
-				"n",
+			},
+		},
+		keys = {
+			{
+				"gn",
+				"<cmd>BufferLineCycleNext<CR>",
+				mode = "n",
+				desc = "Next buffer",
+				silent = true,
+			},
+			{
+				"gp",
+				"<cmd>BufferLineCyclePrev<CR>",
+				mode = "n",
+				desc = "Previous buffer",
+				silent = true,
+			},
+			{
+				"<leader><cr>",
+				"<cmd>BufferLinePick<CR>",
+				mode = "n",
+				desc = "Jump to buffer",
+				silent = true,
+			},
+			{
 				"<leader>bl",
 				"<cmd>BufferLineMoveNext<CR>",
-				{ desc = "Move buffer next in line", silent = true }
-			)
-			keymap.set(
-				"n",
+				mode = "n",
+				desc = "Move buffer next in line",
+				silent = true,
+			},
+			{
+
 				"<leader>bh",
 				"<cmd>BufferLineMovePrev<CR>",
-				{ desc = "Move buffer previous in line", silent = true }
-			)
-			keymap.set(
-				"n",
+				mode = "n",
+				desc = "Move buffer previous in line",
+				silent = true,
+			},
+			{
+
 				"<leader>be",
 				"<cmd>BufferLineSortByExtension<CR>",
-				{ desc = "Sort buffers by extension", silent = true }
-			)
-			keymap.set(
-				"n",
+				mode = "n",
+				desc = "Sort buffers by extension",
+				silent = true,
+			},
+			{
+
 				"<leader>bd",
 				"<cmd>BufferLineSortByDirectory<CR>",
-				{ desc = "Sort buffers by directory", silent = true }
-			)
-			keymap.set(
-				"n",
+				mode = "n",
+				desc = "Sort buffers by directory",
+				silent = true,
+			},
+			{
+
 				"<leader>bt",
 				"<cmd>BufferLineSortByTabs<CR>",
-				{ desc = "sort buffers by tabs", silent = true }
-			)
+				mode = "n",
+				desc = "sort buffers by tabs",
+				silent = true,
+			},
+			{
 
-			keymap.set(
-				"n",
 				"<leader>bk",
 				"<cmd>BufferLinePickClose<CR>",
-				{ desc = "Pick close buffers", silent = true }
-			)
-			keymap.set(
-				"n",
+				mode = "n",
+				desc = "Pick close buffers",
+				silent = true,
+			},
+			{
+
 				"<leader>bn",
 				"<cmd>BufferLineCloseOther<CR>",
-				{ desc = "Nuke other buffers", silent = true }
-			)
-		end,
-	},
-	{
-		"utilyre/barbecue.nvim",
-		name = "barbecue",
-		version = "*",
-		dependencies = {
-			"SmiteshP/nvim-navic",
-			"nvim-tree/nvim-web-devicons",
+				mode = "n",
+				desc = "Nuke other buffers",
+				silent = true,
+			},
 		},
-		event = "VeryLazy",
-		config = function()
-			local barbecue = require("barbecue")
-
-			barbecue.setup({
-				create_autocmd = false,
-				show_dirname = false,
-				show_modified = true,
-				show_basename = false,
-			})
-
-			vim.opt.updatetime = 200
-			vim.api.nvim_create_autocmd({
-				"WinScrolled",
-				"BufWinEnter",
-				"CursorHold",
-				"InsertLeave",
-			}, {
-				group = vim.api.nvim_create_augroup("barbecue.updater", {}),
-				callback = function()
-					require("barbecue.ui").update()
-				end,
-			})
-		end,
 	},
 }

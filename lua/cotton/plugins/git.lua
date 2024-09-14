@@ -2,8 +2,21 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			{
+				"kdheepak/lazygit.nvim",
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+				},
+				init = function()
+					vim.g.lazygit_floating_window_border_chars =
+						{ "┌", "─", "┐", "│", "┘", "─", "└", "│" }
+				end,
+			},
+		},
 		opts = {
 			trouble = false,
+			attach_to_untracked = true,
 			on_attach = function(bufnr)
 				local function map(mode, l, r, desc)
 					vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc, silent = true })
@@ -43,22 +56,10 @@ return {
 
 				-- Text object
 				map({ "o", "x" }, "ih", "<cmd><C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
+
+				-- LazyGit
+				map("n", "<leader><leader>g", "<cmd>LazyGit<cr>", "Open LazyGit")
 			end,
 		},
-	},
-	{
-		"kdheepak/lazygit.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			vim.g.lazygit_floating_window_border_chars = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
-
-			local path = vim.uv.cwd() .. "/.git"
-			local ok, err = vim.uv.fs_stat(path)
-			if ok then
-				vim.keymap.set("n", "<leader><leader>g", "<cmd>LazyGit<CR>", { desc = "Open LazyGit", silent = true })
-			end
-		end,
 	},
 }

@@ -10,9 +10,6 @@ opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
 
--- folding
-vim.wo.foldlevel = 7
-
 -- line wrapping
 opt.wrap = false
 
@@ -47,13 +44,13 @@ vim.g.netrw_nogx = 1
 
 -- lsp
 local border = {
-	{ "╭", "FloatBorder" },
+	{ "┌", "FloatBorder" },
 	{ "─", "FloatBorder" },
-	{ "╮", "FloatBorder" },
+	{ "┐", "FloatBorder" },
 	{ "│", "FloatBorder" },
-	{ "╯", "FloatBorder" },
+	{ "┘", "FloatBorder" },
 	{ "─", "FloatBorder" },
-	{ "╰", "FloatBorder" },
+	{ "└", "FloatBorder" },
 	{ "│", "FloatBorder" },
 }
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview

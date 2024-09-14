@@ -5,5 +5,6 @@ return {
 		version = "v2.*",
 		build = "make install_jsregexp",
 		dependencies = { "rafamadriz/friendly-snippets" },
+		lazy = true,
 	},
 }

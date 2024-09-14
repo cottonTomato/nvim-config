@@ -1,35 +1,21 @@
 return {
-	"hrsh7th/cmp-nvim-lsp-signature-help",
-	"hrsh7th/cmp-buffer",
-	"hrsh7th/cmp-path",
-	"saadparwaiz1/cmp_luasnip",
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		dependencies = {
-			{ "Bilal2453/luvit-meta", lazy = true },
-		},
-		opts = {
-			library = {
-				{ path = "luvit-meta/library", words = { "vim%.uv" } },
-			},
-		},
-	},
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"L3MON4D3/LuaSnip",
 			"onsails/lspkind.nvim",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"saadparwaiz1/cmp_luasnip",
 		},
 		event = "InsertEnter",
-		config = function()
+		opts = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			local lspkind = require("lspkind")
-
 			require("luasnip.loaders.from_vscode").lazy_load()
 
-			cmp.setup({
+			return {
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
@@ -69,8 +55,8 @@ return {
 					{ name = "lazydev", group_index = 0 },
 				}),
 				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
+					completion = cmp.config.window.bordered({ border = "single" }),
+					documentation = cmp.config.window.bordered({ border = "single" }),
 				},
 				experimental = {
 					ghost_text = true,
@@ -78,9 +64,9 @@ return {
 				---@diagnostic disable-next-line: missing-fields
 				formatting = {
 					fields = { "kind", "abbr" },
-					format = lspkind.cmp_format({ mode = "symbol" }),
+					format = require("lspkind").cmp_format({ mode = "symbol" }),
 				},
-			})
+			}
 		end,
 	},
 	{
@@ -101,5 +87,17 @@ return {
 
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
+	},
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		dependencies = {
+			{ "Bilal2453/luvit-meta", lazy = true },
+		},
+		opts = {
+			library = {
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
 	},
 }

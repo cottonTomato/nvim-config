@@ -1,13 +1,13 @@
 -- TODO: Setup
 return {
-	{
-		"mfussenegger/nvim-dap",
-	},
-	{
-		"rcarriga/nvim-dap-ui",
-		dependencies = {
-			"nvim-neotest/nvim-nio",
-			"mfussenegger/nvim-dap",
-		},
-	},
+	-- {
+	-- 	"mfussenegger/nvim-dap",
+	-- },
+	-- {
+	-- 	"rcarriga/nvim-dap-ui",
+	-- 	dependencies = {
+	-- 		"nvim-neotest/nvim-nio",
+	-- 		"mfussenegger/nvim-dap",
+	-- 	},
+	-- },
 }
