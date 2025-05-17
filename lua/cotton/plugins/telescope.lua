@@ -75,10 +75,10 @@ return {
 				silent = true,
 			},
 			{
-				"<leader>fj",
-				"<CMD>Telescope jumplist theme=ivy<CR>",
+				"<leader><cr>",
+				"<CMD>Telescope buffers sort_mru=true ignore_current_buffer=true theme=ivy<CR>",
 				mode = "n",
-				desc = "Search jumplist",
+				desc = "Search open buffers",
 				silent = true,
 			},
 			{
@@ -100,13 +100,6 @@ return {
 				"<CMD>Telescope lsp_references theme=ivy<CR>",
 				mode = "n",
 				desc = "Search workspace references",
-				silent = true,
-			},
-			{
-				"<leader>fc",
-				"<CMD>Telescope git_bcommits theme=ivy<CR>",
-				mode = "n",
-				desc = "Search buffer commits",
 				silent = true,
 			},
 		},

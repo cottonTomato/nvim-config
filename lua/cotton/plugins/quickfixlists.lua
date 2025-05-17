@@ -1,3 +1,4 @@
+-- TODO: fix this shi, i.e. do smtn with is!!
 return {
 	{
 		"stevearc/quicker.nvim",
@@ -5,17 +6,10 @@ return {
 		opts = {},
 		keys = {
 			{
-				"gq",
+				"<leader><leader>q",
 				"<cmd>lua require('quicker').toggle()<cr>",
 				mode = "n",
 				desc = "Open quickfixlist",
-				silent = true,
-			},
-			{
-				"gl",
-				"<cmd>lua require('quicker').toggle({ loclist = true })<cr>",
-				mode = "n",
-				desc = "Open loclist",
 				silent = true,
 			},
 		},

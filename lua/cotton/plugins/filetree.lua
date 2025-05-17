@@ -7,13 +7,27 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
+		event = "VeryLazy",
 		opts = {
+			sources = {
+				"filesystem",
+				"buffers",
+				"git_status",
+				"document_symbols",
+			},
 			source_selector = {
 				winbar = true,
 				content_layout = "center",
 				tab_layout = "active",
+				sources = {
+					{ source = "filesystem" },
+					{ source = "buffers" },
+					{ source = "git_status" },
+					{ source = "document_symbols" },
+				},
 			},
 			filesystem = {
+				hijack_netrw_bheaviour = "open_current",
 				filtered_items = {
 					never_show = {
 						".git",
@@ -71,6 +85,13 @@ return {
 				"<cmd>Neotree focus git_status toggle reveal<CR>",
 				mode = "n",
 				desc = "Explore git status",
+				silent = true,
+			},
+			{
+				"<leader>es",
+				"<cmd>Neotree focus document_symbols toggle reveal<CR>",
+				mode = "n",
+				desc = "Explore document symbols",
 				silent = true,
 			},
 		},

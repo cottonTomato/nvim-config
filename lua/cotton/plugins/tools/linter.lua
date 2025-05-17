@@ -7,17 +7,13 @@ return {
 			local linter = require("lint")
 
 			linter.linter_by_ft = {
-				bash = { "shellcheck" },
-				go = { "golangcilint" },
-				javascript = { "biomejs" },
-				javascriptreact = { "biomejs" },
+				javascript = { "eslint" },
+				javascriptreact = { "eslint" },
 				lua = { "luacheck" },
 				markdown = { "markdownlint" },
-				proto = { "buf_lint" },
 				python = { "ruff" },
-				sql = { "sqlfluff" },
-				typescript = { "biomejs" },
-				typescriptreact = { "biomejs" },
+				typescript = { "eslint" },
+				typescriptreact = { "eslint" },
 			}
 
 			vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {

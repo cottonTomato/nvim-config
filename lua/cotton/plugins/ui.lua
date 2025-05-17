@@ -4,16 +4,13 @@ return {
 		name = "rose-pine",
 		event = "VimEnter",
 		priority = 100,
-		opts = {},
+		opts = {
+			dim_inactive_windows = true,
+		},
 		init = function()
 			vim.opt.background = "dark"
-			vim.cmd.colorscheme("rose-pine-moon")
+			vim.cmd.colorscheme("rose-pine")
 		end,
-	},
-	{
-		"nvim-zh/colorful-winsep.nvim",
-		event = { "WinLeave" },
-		opts = {},
 	},
 	{
 		"stevearc/dressing.nvim",
@@ -63,6 +60,8 @@ return {
 			mappings = {
 				object_scope = "",
 				object_scope_with_border = "",
+				goto_top = "",
+				goto_bottom = "",
 			},
 			draw = {
 				delay = 100,

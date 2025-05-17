@@ -5,44 +5,43 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			{ "antosha417/nvim-lsp-file-operations", config = true },
 			"williamboman/mason-lspconfig.nvim",
-			"MysticalDevil/inlay-hints.nvim",
 		},
 		ft = {
+			"c",
 			"cpp",
-			"go",
-			"lua",
 			"javascript",
 			"javascriptreact",
+			"lua",
 			"python",
 			"typescript",
 			"typescriptreact",
 			"rust",
-			"zig",
 		},
 		config = function()
-			local lspconfig = require("lspconfig")
-			local mason_lspconfig = require("mason-lspconfig")
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
-			local inlay_hints = require("inlay-hints")
 
 			local keymap = vim.keymap
 			local opts = { silent = true }
 
 			-- keymap
 			opts.desc = "Restart LSP"
-			keymap.set("n", "<leader><leader>+", "<cmd>LspRestart<CR>", opts)
+			keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", opts)
 
 			opts.desc = "Rename symbol"
-			keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+			keymap.set("n", "<leader>ln", vim.lsp.buf.rename, opts)
 
 			opts.desc = "See code actions"
 			keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
 
 			opts.desc = "Previous diagnostic"
-			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+			keymap.set("n", "[d", function()
+				vim.diagnostic.jump({ count = -1, float = true })
+			end, opts)
 
 			opts.desc = "Next diagnostic"
-			keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+			keymap.set("n", "]d", function()
+				vim.diagnostic.jump({ count = 1, float = true })
+			end, opts)
 
 			opts.desc = "Show line diagnostics"
 			keymap.set("n", "Z", vim.diagnostic.open_float, opts)
@@ -58,112 +57,35 @@ return {
 
 			local capabilities = cmp_nvim_lsp.default_capabilities()
 
-			mason_lspconfig.setup_handlers({
-				function(server_name)
-					lspconfig[server_name].setup({
-						capabilities = capabilities,
-					})
-				end,
-				["pyright"] = function()
-					lspconfig["pyright"].setup({
-						settings = {
-							pyright = {
-								disableOrganizeImports = true,
-							},
-						},
-					})
-				end,
-				["lua_ls"] = function()
-					lspconfig["lua_ls"].setup({
-						on_attach = function(client, bufnr)
-							inlay_hints.on_attach(client, bufnr)
-						end,
-						settings = {
-							Lua = {
-								hint = {
-									enable = true,
-								},
-							},
-						},
-					})
-				end,
-				["gopls"] = function()
-					lspconfig["gopls"].setup({
-						on_attach = function(client, bufnr)
-							inlay_hints.on_attach(client, bufnr)
-						end,
-						settings = {
-							gopls = {
-								hints = {
-									rangeVariableTypes = true,
-									parameterNames = true,
-									constantValues = true,
-									assignVariableTypes = true,
-									compositeLiteralFields = true,
-									compositeLiteralTypes = true,
-									functionTypeParameters = true,
-								},
-							},
-						},
-					})
-				end,
-				["ts_ls"] = function()
-					lspconfig["ts_ls"].setup({
-						on_attach = function(client, bufnr)
-							inlay_hints.on_attach(client, bufnr)
-						end,
-						settings = {
-							typescript = {
-								inlayHints = {
-									includeInlayParameterNameHints = "all",
-									includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-									includeInlayFunctionParameterTypeHints = true,
-									includeInlayVariableTypeHints = true,
-									includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-									includeInlayPropertyDeclarationTypeHints = true,
-									includeInlayFunctionLikeReturnTypeHints = true,
-									includeInlayEnumMemberValueHints = true,
-								},
-							},
-							javascript = {
-								inlayHints = {
-									includeInlayParameterNameHints = "all",
-									includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-									includeInlayFunctionParameterTypeHints = true,
-									includeInlayVariableTypeHints = true,
-									includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-									includeInlayPropertyDeclarationTypeHints = true,
-									includeInlayFunctionLikeReturnTypeHints = true,
-									includeInlayEnumMemberValueHints = true,
-								},
-							},
-						},
-					})
-				end,
-				["zls"] = function()
-					lspconfig["zls"].setup({
-						on_attach = function(client, bufnr)
-							inlay_hints.on_attach(client, bufnr)
-						end,
-						settings = {
-							zls = {
-								enable_inlay_hints = true,
-								inlay_hints_show_builtin = true,
-								inlay_hints_exclude_single_argument = true,
-								inlay_hints_hide_redundant_param_names = false,
-								inlay_hints_hide_redundant_param_names_last_token = false,
-							},
-						},
-					})
-				end,
+			vim.lsp.config("*", {
+				capabilities = capabilities,
 			})
 
-			lspconfig["clangd"].setup({
-				capabilities = capabilities,
+			vim.lsp.config("lua_ls", {
+				settings = {
+					Lua = {
+						hint = {
+							enable = true,
+						},
+					},
+				},
+			})
+
+			vim.lsp.config("pyright", {
+				pyright = {
+					-- Using Ruff's import organizer
+					disableOrganizeImports = true,
+				},
+				python = {
+					analysis = {
+						-- Ignore all files for analysis to exclusively use Ruff for linting
+						ignore = { "*" },
+					},
+				},
+			})
+
+			vim.lsp.config("clangd", {
 				cmd = { "clangd", "--clang-tidy" },
-				on_attach = function(client, bufnr)
-					inlay_hints.on_attach(client, bufnr)
-				end,
 				settings = {
 					clangd = {
 						InlayHints = {
@@ -177,11 +99,7 @@ return {
 				},
 			})
 
-			lspconfig["rust_analyzer"].setup({
-				capabilities = capabilities,
-				on_attach = function(client, bufnr)
-					inlay_hints.on_attach(client, bufnr)
-				end,
+			vim.lsp.config("rust_analyzer", {
 				settings = {
 					["rust-analyzer"] = {
 						check = {
@@ -222,13 +140,15 @@ return {
 					},
 				},
 			})
+
+			vim.lsp.enable({ "clangd", "rust_analyzer" })
 		end,
 	},
 	{
 		"antosha417/nvim-lsp-file-operations",
 		ft = {
+			"c",
 			"cpp",
-			"go",
 			"lua",
 			"javascript",
 			"javascriptreact",
@@ -236,7 +156,6 @@ return {
 			"typescript",
 			"typescriptreact",
 			"rust",
-			"zig",
 		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -245,56 +164,11 @@ return {
 		opts = {},
 	},
 	{
-		"zbirenbaum/neodim",
+		"MysticalDevil/inlay-hints.nvim",
 		event = "LspAttach",
-		opts = {
-			alpha = 0.75,
-			blend_color = "#000000",
-			hide = {
-				underline = true,
-				virtual_text = true,
-				signs = true,
-			},
-			regex = {
-				"[uU]nused",
-				"[nN]ever [rR]ead",
-				"[nN]ot [rR]ead",
-			},
-			priority = 128,
-			disable = {},
-		},
-	},
-	{
-		"kosayoda/nvim-lightbulb",
-		ft = {
-			"cpp",
-			"go",
-			"lua",
-			"javascript",
-			"javascriptreact",
-			"python",
-			"typescript",
-			"typescriptreact",
-			"rust",
-			"zig",
-		},
-		opts = {
-			sign = {
-				enabled = false,
-			},
-			virtual_text = {
-				enabled = true,
-			},
-			autocmd = {
-				enabled = true,
-			},
-			ignore = {
-				ft = {
-					"alpha",
-					"neo-tree",
-					"help",
-				},
-			},
-		},
+		dependencies = { "neovim/nvim-lspconfig" },
+		config = function()
+			require("inlay-hints").setup()
+		end,
 	},
 }

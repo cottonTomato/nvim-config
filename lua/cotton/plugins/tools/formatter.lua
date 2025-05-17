@@ -8,7 +8,7 @@ return {
 			{
 				"<leader>lf",
 				function()
-					require("conform").format({ lsp_format = "fallback", timeout_ms = 500 })
+					require("conform").format({ lsp_fallback = true, async = true })
 				end,
 				mode = "n",
 				desc = "Format buffer",
@@ -22,7 +22,6 @@ return {
 				cmake = { "gersemi" },
 				cpp = { "clang-format" },
 				fish = { "fish_indent" },
-				go = { "goimports" },
 				html = { "prettier" },
 				javascript = { "prettier" },
 				javascriptreact = { "prettier" },
@@ -30,20 +29,17 @@ return {
 				just = { "just" },
 				lua = { "stylua" },
 				markdown = { "mdformat" },
-				proto = { "buf" },
 				python = { "ruff_format", "ruff_organize_imports" },
 				rust = { "rustfmt" },
 				sql = { "sql_formatter" },
 				toml = { "taplo" },
 				typescript = { "prettier" },
 				typescriptreact = { "prettier" },
-				xml = { "xmlformat" },
+				xml = { "xmlformatter" },
 				yaml = { "prettier" },
-				zig = { "zigfmt" },
 			},
-			format_on_save = {
+			format_after_save = {
 				lsp_format = "fallback",
-				timeout_ms = 500,
 			},
 		},
 		init = function()

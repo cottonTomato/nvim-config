@@ -1,15 +1,12 @@
 return {
 	{
 		"numToStr/Comment.nvim",
-		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
+		event = { "BufReadPre", "BufNewFile" },
 		opts = function()
 			return {
-				toggler = {
-					block = "gbb",
-				},
 				pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 			}
 		end,
@@ -118,24 +115,24 @@ return {
 				silent = true,
 			},
 			{
-				"]P",
+				"gp",
 				"<Plug>(YankyPutIndentAfterLinewise)",
 				mode = { "n", "x" },
 				desc = "Paste after linewise",
 				silent = true,
 			},
 			{
-				"[P",
+				"gP",
 				"<Plug>(YankyPutIndentBeforeLinewise)",
 				mode = { "n", "x" },
-				desc = "Previous entry in kill ring",
+				desc = "Paste before linewise",
 				silent = true,
 			},
 			{
 				"<C-p>",
 				"<Plug>(YankyPreviousEntry)",
 				mode = "n",
-				desc = "Paste after",
+				desc = "Previous entry in kill ring",
 				silent = true,
 			},
 			{
@@ -151,35 +148,134 @@ return {
 		"chrisgrieser/nvim-various-textobjs",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
-			useDefaultKeymaps = true,
-			disabledKeymaps = {
-				"r",
-				"im",
-				"am",
-				"il",
-				"al",
-				"ie",
-				"ae",
-				"iC",
-				"aC",
-				"ic",
-				"ac",
-				"i#",
-				"a#",
-				"ix",
-				"ax",
-				"iD",
-				"aD",
-				"iP",
-				"aP",
-				"iy",
-				"ay",
-				"iN",
-				"aN",
+			keymaps = {
+				useDefaults = false,
 			},
-			notifyNotFound = false,
 		},
 		keys = {
+			{
+				"ai",
+				"<cmd>lua require('various-textobjs').indentation('outer')<cr>",
+				mode = { "o", "x" },
+				desc = "outer indentation level",
+				silent = true,
+			},
+			{
+				"ii",
+				"<cmd>lua require('various-textobjs').indentation('inner')<cr>",
+				mode = { "o", "x" },
+				desc = "inner indentation level",
+				silent = true,
+			},
+
+			{
+				"R",
+				"<cmd>lua require('various-textobjs').restOfIndentation()<cr>",
+				mode = { "o", "x" },
+				desc = "rest of indentation",
+				silent = true,
+			},
+
+			{
+				"aS",
+				"<cmd>lua require('various-textobjs').subword('outer')<cr>",
+				mode = { "o", "x" },
+				desc = "outer subword",
+				silent = true,
+			},
+			{
+				"iS",
+				"<cmd>lua require('various-textobjs').subword('inner')<cr>",
+				mode = { "o", "x" },
+				desc = "inner subword",
+				silent = true,
+			},
+
+			{
+				"C",
+				"<cmd>lua require('various-textobjs').toNextClosingBracket()<cr>",
+				mode = { "o", "x" },
+				desc = "to next closing bracket",
+				silent = true,
+			},
+
+			{
+				"Q",
+				"<cmd>lua require('various-textobjs').toNextQuotationMark()<cr>",
+				mode = { "o", "x" },
+				desc = "to next quotation mark",
+				silent = true,
+			},
+
+			{
+				"aq",
+				"<cmd>lua require('various-textobjs').anyQuote('outer')<cr>",
+				mode = { "o", "x" },
+				desc = "outer quote",
+				silent = true,
+			},
+			{
+				"iq",
+				"<cmd>lua require('various-textobjs').anyQuote('inner')<cr>",
+				mode = { "o", "x" },
+				desc = "inner quote",
+				silent = true,
+			},
+
+			{
+				"ab",
+				"<cmd>lua require('various-textobjs').anyBracket('outer')<cr>",
+				mode = { "o", "x" },
+				desc = "outer bracket/braces",
+				silent = true,
+			},
+			{
+				"ib",
+				"<cmd>lua require('various-textobjs').anyBracket('inner')<cr>",
+				mode = { "o", "x" },
+				desc = "inner bracket/braces",
+				silent = true,
+			},
+
+			{
+				"gG",
+				"<cmd>lua require('various-textobjs').entireBuffer()<cr>",
+				mode = { "o", "x" },
+				desc = "entire buffer",
+				silent = true,
+			},
+
+			{
+				"n",
+				"<cmd>lua require('various-textobjs').nearEoL()<cr>",
+				mode = { "o", "x" },
+				desc = "to EoL",
+				silent = true,
+			},
+
+			{
+				"L",
+				"<cmd>lua require('various-textobjs').url()<cr>",
+				mode = { "o", "x" },
+				desc = "url",
+				silent = true,
+			},
+
+			{
+				"!",
+				"<cmd>lua require('various-textobjs').diagnostic()<cr>",
+				mode = { "o", "x" },
+				desc = "diagnostic",
+				silent = true,
+			},
+
+			{
+				"aM",
+				"<cmd>lua require('various-textobjs').chainMember('outer')<cr>",
+				mode = { "o", "x" },
+				desc = "outer method chain",
+				silent = true,
+			},
 			{
 				"iM",
 				"<cmd>lua require('various-textobjs').chainMember('inner')<cr>",
@@ -187,11 +283,19 @@ return {
 				desc = "inner method chain",
 				silent = true,
 			},
+
 			{
-				"aM",
-				"<cmd>lua require('various-textobjs').chainMember('outer')<cr>",
+				"aF",
+				"<cmd>lua require('various-textobjs').filepath('outer')<cr>",
 				mode = { "o", "x" },
-				desc = "outer method chain",
+				desc = "filepath",
+				silent = true,
+			},
+			{
+				"iF",
+				"<cmd>lua require('various-textobjs').filepath('inner')<cr>",
+				mode = { "o", "x" },
+				desc = "filename",
 				silent = true,
 			},
 		},
@@ -228,21 +332,15 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			mappings = {
-				left = "<C-h>",
-				right = "<C-l>",
-				down = "<C-j>",
-				up = "<C-k>",
-				line_left = "<C-h>",
-				line_right = "<C-l>",
-				line_down = "<C-j>",
-				line_up = "<C-k>",
+				left = "<C-S-h>",
+				right = "<C-S-l>",
+				down = "<C-S-j>",
+				up = "<C-S-k>",
+				line_left = "<C-S-h>",
+				line_right = "<C-S-l>",
+				line_down = "<C-S-j>",
+				line_up = "<C-S-k>",
 			},
 		},
-	},
-	{
-		"echasnovski/mini.align",
-		version = "*",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {},
 	},
 }

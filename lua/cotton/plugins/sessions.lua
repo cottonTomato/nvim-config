@@ -34,13 +34,6 @@ return {
 				silent = true,
 			},
 			{
-				"<leader>sp",
-				"<cmd>SessionPurgeOrphaned<cr>",
-				mode = "n",
-				desc = "Purge orphaned sessions",
-				silent = true,
-			},
-			{
 				"<leader>sf",
 				"<cmd>Autosession search<cr>",
 				mode = "n",
@@ -55,10 +48,10 @@ return {
 				silent = true,
 			},
 			{
-				"<leader>st",
-				"<cmd>SessionToggleAutoSave<cr>",
+				"<leader>sp",
+				"<cmd>SessionPurgeOrphaned<cr>",
 				mode = "n",
-				desc = "Toggle auto save",
+				desc = "Purge Orphaned Sessions",
 				silent = true,
 			},
 		},

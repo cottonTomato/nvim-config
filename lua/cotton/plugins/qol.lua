@@ -22,6 +22,24 @@ return {
 		},
 	},
 	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("ts_context_commentstring").setup({
+				enable_autocmd = false,
+			})
+
+			local get_option = vim.filetype.get_option
+
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.filetype.get_option = function(filetype, option)
+				return option == "commentstring"
+						and require("ts_context_commentstring.internal").calculate_commentstring()
+					or get_option(filetype, option)
+			end
+		end,
+	},
+	{
 		"echasnovski/mini.bufremove",
 		version = "*",
 		opts = {},
@@ -74,28 +92,6 @@ return {
 				desc = "Jump to window",
 			},
 		},
-	},
-	{
-		"echasnovski/mini.misc",
-		version = "*",
-		opts = {},
-		keys = {
-			{
-				"<leader>bz",
-				"<cmd>lua require('mini.misc').zoom()<cr>",
-				mode = "n",
-				desc = "Toggle buffer zoom",
-				silent = true,
-			},
-		},
-	},
-	{
-		"chrishrb/gx.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		submodules = false,
-		cmd = { "Browse" },
-		keys = { { "<leader><leader>o", "<cmd>Browse<cr>", mode = { "n", "x" }, desc = "Open in browser" } },
-		opts = { handler_options = { search_engine = "https://search.brave.com/search?q=" } },
 	},
 	{
 		"nmac427/guess-indent.nvim",
