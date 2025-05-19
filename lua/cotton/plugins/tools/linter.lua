@@ -1,32 +1,35 @@
 return {
 	{
 		"mfussenegger/nvim-lint",
-		dependencies = "WhoIsSethDaniel/mason-tool-installer.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre" },
 		config = function()
 			local linter = require("lint")
 
-			linter.linter_by_ft = {
+			linter.linters_by_ft = {
+				fish = { "fish" },
 				javascript = { "eslint" },
 				javascriptreact = { "eslint" },
 				lua = { "luacheck" },
 				markdown = { "markdownlint" },
 				python = { "ruff" },
+				tex = { "lacheck" },
 				typescript = { "eslint" },
 				typescriptreact = { "eslint" },
 			}
 
-			vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
-				group = vim.api.nvim_create_augroup("lint", { clear = true }),
-				callback = function()
-					linter.try_lint(nil, { ignore_errors = true })
-					linter.try_lint("codespell")
-				end,
+			local linting_callback = function()
+				require("lint").try_lint()
+				require("lint").try_lint("codespell")
+			end
+
+			vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+				callback = linting_callback,
 				desc = "Linting",
 			})
-
-			-- keymap
-			vim.keymap.set("n", "<leader>ll", linter.try_lint, { desc = "Lint buffer", silent = true })
+			vim.keymap.set("n", "<leader>ll", linting_callback, {
+				desc = "Lint buffer",
+				silent = true,
+			})
 		end,
 	},
 }

@@ -23,7 +23,8 @@ return {
 							active = { fg = "#ea9a97", gui = "italic" },
 						},
 						filetype_names = {
-							trouble = "Trouble",
+							snacks_picker_list = "Explorer",
+							snacks_dashboard = "Dashboard",
 						},
 					},
 				},
@@ -39,10 +40,7 @@ return {
 			},
 			extensions = {
 				"lazy",
-				"neo-tree",
 				"mason",
-				"trouble",
-				"quickfix",
 			},
 		},
 	},

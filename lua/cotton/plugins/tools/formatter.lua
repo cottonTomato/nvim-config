@@ -1,7 +1,6 @@
 return {
 	{
 		"stevearc/conform.nvim",
-		dependencies = "WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
@@ -18,7 +17,9 @@ return {
 		opts = {
 			formatters_by_ft = {
 				bash = { "shfmt" },
+				bib = { "tex-fmt" },
 				c = { "clang-format" },
+				cls = { "tex-fmt" },
 				cmake = { "gersemi" },
 				cpp = { "clang-format" },
 				fish = { "fish_indent" },
@@ -32,6 +33,8 @@ return {
 				python = { "ruff_format", "ruff_organize_imports" },
 				rust = { "rustfmt" },
 				sql = { "sql_formatter" },
+				sty = { "tex-fmt" },
+				tex = { "tex-fmt" },
 				toml = { "taplo" },
 				typescript = { "prettier" },
 				typescriptreact = { "prettier" },

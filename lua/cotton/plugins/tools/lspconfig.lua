@@ -3,8 +3,7 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			{ "antosha417/nvim-lsp-file-operations", config = true },
-			"williamboman/mason-lspconfig.nvim",
+			"mason-org/mason-lspconfig.nvim",
 		},
 		ft = {
 			"c",
@@ -49,12 +48,6 @@ return {
 			opts.desc = "Show documentation"
 			keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-			local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
-			for type, icon in pairs(signs) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-			end
-
 			local capabilities = cmp_nvim_lsp.default_capabilities()
 
 			vim.lsp.config("*", {
@@ -71,15 +64,42 @@ return {
 				},
 			})
 
-			vim.lsp.config("pyright", {
-				pyright = {
-					-- Using Ruff's import organizer
-					disableOrganizeImports = true,
+			vim.lsp.config("tsserver", {
+				settings = {
+					typescript = {
+						inlayHints = {
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
+					javascript = {
+						inlayHints = {
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
 				},
-				python = {
+			})
+
+			vim.lsp.config("basedpyright", {
+				basedpyright = {
+					disableOrganizeImports = true,
 					analysis = {
-						-- Ignore all files for analysis to exclusively use Ruff for linting
-						ignore = { "*" },
+						autoSearchPaths = true,
+						diagnosticMode = "openFilesOnly",
+						useLibraryCodeForTypes = true,
 					},
 				},
 			})
@@ -145,30 +165,17 @@ return {
 		end,
 	},
 	{
-		"antosha417/nvim-lsp-file-operations",
-		ft = {
-			"c",
-			"cpp",
-			"lua",
-			"javascript",
-			"javascriptreact",
-			"python",
-			"typescript",
-			"typescriptreact",
-			"rust",
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-neo-tree/neo-tree.nvim",
-		},
-		opts = {},
-	},
-	{
 		"MysticalDevil/inlay-hints.nvim",
 		event = "LspAttach",
 		dependencies = { "neovim/nvim-lspconfig" },
 		config = function()
 			require("inlay-hints").setup()
+			vim.keymap.set(
+				"n",
+				"<leader>th",
+				"<cmd>InlayHintsToggle<cr>",
+				{ desc = "Toggle inlay hints", silent = true }
+			)
 		end,
 	},
 }

@@ -20,13 +20,6 @@ return {
 		},
 		keys = {
 			{
-				"<leader>ss",
-				"<cmd>SessionSave<cr>",
-				mode = "n",
-				desc = "Save session",
-				silent = true,
-			},
-			{
 				"<leader>sr",
 				"<cmd>SessionRestore<cr>",
 				mode = "n",

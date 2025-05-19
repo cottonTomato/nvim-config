@@ -1,57 +1,55 @@
 return {
 	{
 		"mrjones2014/smart-splits.nvim",
-		version = ">=1.0.0",
-		lazy = false,
 		opts = {},
 		keys = {
 			{
 				"<M-h>",
 				"<cmd>lua require('smart-splits').move_cursor_left()<cr>",
 				"n",
-				desc = "Move cursor right",
+				desc = "Focus window right",
 				silent = true,
 			},
 			{
 				"<M-l>",
 				"<cmd>lua require('smart-splits').move_cursor_right()<cr>",
 				"n",
-				desc = "Move cursor left",
+				desc = "Focus window left",
 				silent = true,
 			},
 			{
 				"<M-j>",
 				"<cmd>lua require('smart-splits').move_cursor_down()<cr>",
 				"n",
-				desc = "Move cursor down",
+				desc = "Focus window down",
 				silent = true,
 			},
 			{
 				"<M-k>",
 				"<cmd>lua require('smart-splits').move_cursor_up()<cr>",
 				"n",
-				desc = "Move cursor up",
+				desc = "Focus window up",
 				silent = true,
 			},
 			{
 				"<M-S-h>",
 				"<cmd>lua require('smart-splits').resize_left()<cr>",
 				"n",
-				desc = "Move cursor right",
+				desc = "Resize split right",
 				silent = true,
 			},
 			{
 				"<M-S-l>",
 				"<cmd>lua require('smart-splits').resize_right()<cr>",
 				"n",
-				desc = "Move cursor left",
+				desc = "Resize split left",
 				silent = true,
 			},
 			{
 				"<M-S-j>",
 				"<cmd>lua require('smart-splits').resize_down()<cr>",
 				"n",
-				desc = "Move cursor down",
+				desc = "Resize split down",
 				silent = true,
 			},
 			{
@@ -95,7 +93,6 @@ return {
 	},
 	{
 		"echasnovski/mini.jump2d",
-		version = "*",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			silent = false,

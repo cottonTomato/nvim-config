@@ -1,10 +1,11 @@
 return {
 	{
-		"williamboman/mason.nvim",
-		lazy = true,
+		"mason-org/mason.nvim",
+		build = ":MasonUpdate",
+		cmd = { "Mason" },
 		opts = {
 			ui = {
-				border = "single",
+				border = "rounded",
 				icons = {
 					package_installed = " ",
 					package_pending = "󱌢 ",
@@ -23,24 +24,20 @@ return {
 		},
 	},
 	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = "williamboman/mason.nvim",
-		lazy = true,
+		"mason-org/mason-lspconfig.nvim",
+		dependencies = { "mason-org/mason.nvim" },
 		opts = {
 			ensure_installed = {
 				"neocmake", -- cmake
 				"lua_ls", -- lua
-				"pyright", -- python
+				"basedpyright", -- python
 				"ts_ls", -- ts, tsx
 			},
 		},
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		dependencies = {
-			"williamboman/mason.nvim",
-		},
-		lazy = true,
+		dependencies = { "mason-org/mason.nvim" },
 		opts = {
 			ensure_installed = {
 				-- formatters
@@ -52,6 +49,7 @@ return {
 				"sql-formatter", -- sql
 				"taplo", -- toml
 				"xmlformatter", -- xml
+				"tex-fmt", -- tex, bib, cls, sty
 				-- linters
 				"luacheck", -- lua
 				"markdownlint", -- markdown

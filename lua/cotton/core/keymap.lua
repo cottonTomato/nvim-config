@@ -24,12 +24,12 @@ keymap.del("n", "grr")
 keymap.del({ "i", "s" }, "<C-s>")
 
 -- navigation
-keymap.set("n", "[b", "<cmd>bnext<cr>", { desc = "Next buffer", silent = true })
-keymap.set("n", "]b", "<cmd>bprev<cr>", { desc = "Previous buffer", silent = true })
-keymap.set("n", "[B", "<cmd>bfirst<cr>", { desc = "First buffer", silent = true })
-keymap.set("n", "]B", "<cmd>blast<cr>", { desc = "Last buffer", silent = true })
-keymap.set("n", "[T", "<cmd>tabnext<cr>", { desc = "Next tab", silent = true })
-keymap.set("n", "]T", "<cmd>tabprevious<cr>", { desc = "Previous tab", silent = true })
+keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer", silent = true })
+keymap.set("n", "[b", "<cmd>bprev<cr>", { desc = "Previous buffer", silent = true })
+keymap.set("n", "]B", "<cmd>bfirst<cr>", { desc = "First buffer", silent = true })
+keymap.set("n", "[B", "<cmd>blast<cr>", { desc = "Last buffer", silent = true })
+keymap.set("n", "]T", "<cmd>tabnext<cr>", { desc = "Next tab", silent = true })
+keymap.set("n", "[T", "<cmd>tabprevious<cr>", { desc = "Previous tab", silent = true })
 
 keymap.del("n", "]D")
 keymap.del("n", "[D")
@@ -53,7 +53,7 @@ keymap.del("n", "]<C-l>")
 keymap.del("n", "[<C-l>")
 
 -- misc
-keymap.set("n", "gw", "<cmd>tabclose<cr>", { desc = "Tab close", silent = true })
+keymap.set("n", "gW", "<cmd>tabclose<cr>", { desc = "Tab close", silent = true })
 
 -- textobjects
 keymap.set({ "x", "o" }, "aP", "ap", { desc = "outer paragraph", noremap = true })

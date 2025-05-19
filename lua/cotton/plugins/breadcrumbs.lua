@@ -18,10 +18,29 @@ return {
 		},
 		opts = {
 			lsp = { auto_attach = true },
+			window = {
+				border = "rounded",
+				sections = {
+					left = {
+						size = "20%",
+					},
+					mid = {
+						size = "30%",
+					},
+				},
+			},
+			node_markers = {
+				enabled = true,
+				icons = {
+					leaf = "  ",
+					leaf_selected = "→ ",
+					branch = " ",
+				},
+			},
 		},
 		keys = {
 			{
-				"<leader>lx",
+				"<leader>bx",
 				"<cmd>Navbuddy<cr>",
 				"n",
 				desc = "Buffer outline navigation",

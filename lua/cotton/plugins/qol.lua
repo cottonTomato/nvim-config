@@ -1,7 +1,26 @@
 return {
 	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 500
+		end,
+		opts = {
+			preset = "modern",
+			icons = {
+				breadcrumb = ">",
+				separator = " ",
+				mappings = false,
+			},
+			win = {
+				border = "rounded",
+			},
+		},
+	},
+	{
 		"folke/todo-comments.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim", "folke/snacks.nvim" },
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
 		keys = {
@@ -19,43 +38,11 @@ return {
 				desc = "Next todo comment",
 				silent = true,
 			},
-		},
-	},
-	{
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("ts_context_commentstring").setup({
-				enable_autocmd = false,
-			})
-
-			local get_option = vim.filetype.get_option
-
-			---@diagnostic disable-next-line: duplicate-set-field
-			vim.filetype.get_option = function(filetype, option)
-				return option == "commentstring"
-						and require("ts_context_commentstring.internal").calculate_commentstring()
-					or get_option(filetype, option)
-			end
-		end,
-	},
-	{
-		"echasnovski/mini.bufremove",
-		version = "*",
-		opts = {},
-		keys = {
 			{
-				"<leader>bc",
-				"<cmd>lua require('mini.bufremove').delete(0, false)<cr>",
+				"<leader>xt",
+				"<cmd>lua require('snacks').picker.todo_comments()<CR>",
 				mode = "n",
-				desc = "Close buffer",
-				silent = true,
-			},
-			{
-				"<leader>bq",
-				"<cmd>lua require('mini.bufremove').delete(0, true)<cr>",
-				mode = "n",
-				desc = "Force close buffer",
+				desc = "Explore workspace todos",
 				silent = true,
 			},
 		},
@@ -98,4 +85,5 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
 	},
+	{ "echasnovski/mini.cursorword", event = { "BufReadPre", "BufNewFile" }, opts = {} },
 }

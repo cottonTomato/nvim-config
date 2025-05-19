@@ -22,7 +22,7 @@ require("lazy").setup({ { import = "cotton.plugins" }, { import = "cotton.plugin
 		enabled = true,
 	},
 	ui = {
-		border = "single",
+		border = "rounded",
 		title = "Lazy.nvim",
 	},
 })
